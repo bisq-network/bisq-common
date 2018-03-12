@@ -17,9 +17,9 @@
 
 package bisq.common.proto;
 
-import bisq.common.proto.persistable.PersistableEnvelope;
 import bisq.common.Payload;
 import bisq.common.proto.persistable.PersistableEnvelope;
+
 import io.bisq.generated.protobuffer.PB;
 
 public interface ProtoResolver {

@@ -18,11 +18,12 @@
 package bisq.common.util;
 
 import com.google.common.math.DoubleMath;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MathUtils {
     private static final Logger log = LoggerFactory.getLogger(MathUtils.class);

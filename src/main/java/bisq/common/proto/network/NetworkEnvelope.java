@@ -17,9 +17,12 @@
 
 package bisq.common.proto.network;
 
-import com.google.protobuf.Message;
 import bisq.common.Envelope;
+
 import io.bisq.generated.protobuffer.PB;
+
+import com.google.protobuf.Message;
+
 import lombok.EqualsAndHashCode;
 
 import static com.google.common.base.Preconditions.checkArgument;

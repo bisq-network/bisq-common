@@ -17,12 +17,12 @@
 
 package bisq.common.app;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import lombok.Getter;
+import lombok.Setter;
 
 public class Capabilities {
     // We can define here special features the client is supporting.

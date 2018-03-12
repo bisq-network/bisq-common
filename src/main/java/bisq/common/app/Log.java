@@ -18,6 +18,13 @@
 package bisq.common.app;
 
 import bisq.common.util.Profiler;
+
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
+import org.slf4j.LoggerFactory;
+
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
@@ -26,11 +33,6 @@ import ch.qos.logback.core.rolling.FixedWindowRollingPolicy;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy;
 import ch.qos.logback.core.util.FileSize;
-import bisq.common.util.Profiler;
-import org.slf4j.LoggerFactory;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Log {
     private static Logger logbackLogger;

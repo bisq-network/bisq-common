@@ -18,15 +18,16 @@
 package bisq.common.proto.persistable;
 
 import com.google.protobuf.Message;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Delegate;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Delegate;
 
 public class PersistableList<T extends PersistablePayload> implements PersistableEnvelope {
     @Delegate

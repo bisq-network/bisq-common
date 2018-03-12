@@ -17,22 +17,31 @@
 
 package bisq.common.storage;
 
-import com.google.common.util.concurrent.CycleDetectingLockFactory;
 import bisq.common.UserThread;
 import bisq.common.proto.persistable.PersistableEnvelope;
 import bisq.common.proto.persistable.PersistenceProtoResolver;
 import bisq.common.util.Utilities;
-import io.bisq.generated.protobuffer.PB;
-import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import io.bisq.generated.protobuffer.PB;
+
+import com.google.common.util.concurrent.CycleDetectingLockFactory;
+
 import java.nio.file.Paths;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class FileManager<T extends PersistableEnvelope> {

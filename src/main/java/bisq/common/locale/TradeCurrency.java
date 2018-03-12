@@ -19,11 +19,14 @@ package bisq.common.locale;
 
 import bisq.common.proto.ProtobufferException;
 import bisq.common.proto.persistable.PersistablePayload;
+
 import io.bisq.generated.protobuffer.PB;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+
 import org.jetbrains.annotations.NotNull;
 
 @EqualsAndHashCode

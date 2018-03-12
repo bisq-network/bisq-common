@@ -17,21 +17,27 @@
 
 package bisq.common.storage;
 
-import com.google.common.io.Files;
 import bisq.common.util.Utilities;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
+import com.google.common.io.Files;
+
+import org.apache.commons.io.FileUtils;
+
+import java.nio.file.Paths;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Paths;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Nullable;
 
 public class FileUtil {
     private static final Logger log = LoggerFactory.getLogger(FileUtil.class);

@@ -17,11 +17,11 @@
 
 package bisq.common.locale;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.Locale;
 import java.util.Optional;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

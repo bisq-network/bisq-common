@@ -17,12 +17,12 @@
 
 package bisq.common.locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LocaleUtil {
     private static final Logger log = LoggerFactory.getLogger(LocaleUtil.class);

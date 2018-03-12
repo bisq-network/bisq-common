@@ -17,15 +17,18 @@
 
 package bisq.common.locale;
 
-import com.google.protobuf.Message;
 import bisq.common.GlobalSettings;
+
 import io.bisq.generated.protobuffer.PB;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+
+import com.google.protobuf.Message;
 
 import java.util.Currency;
 import java.util.Locale;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString

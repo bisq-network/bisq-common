@@ -17,12 +17,15 @@
 
 package bisq.common.crypto;
 
-import com.google.protobuf.ByteString;
 import bisq.common.proto.network.NetworkPayload;
+
 import io.bisq.generated.protobuffer.PB;
-import lombok.Value;
+
+import com.google.protobuf.ByteString;
 
 import java.security.PublicKey;
+
+import lombok.Value;
 
 @Value
 public final class SealedAndSigned implements NetworkPayload {

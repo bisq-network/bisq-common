@@ -17,16 +17,19 @@
 
 package bisq.common.crypto;
 
+import javax.inject.Inject;
+
+import org.bouncycastle.openpgp.PGPKeyPair;
+import org.bouncycastle.openpgp.PGPPublicKey;
+
+import java.security.KeyPair;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.openpgp.PGPKeyPair;
-import org.bouncycastle.openpgp.PGPPublicKey;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
-import java.security.KeyPair;
 
 @Getter
 @EqualsAndHashCode

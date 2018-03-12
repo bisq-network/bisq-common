@@ -17,12 +17,13 @@
 
 package bisq.common.crypto;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.X509EncodedKeySpec;
+
 import java.util.Base64;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class CryptoUtils {

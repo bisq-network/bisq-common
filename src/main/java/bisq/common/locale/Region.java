@@ -17,9 +17,12 @@
 
 package bisq.common.locale;
 
-import com.google.protobuf.Message;
 import bisq.common.proto.persistable.PersistablePayload;
+
 import io.bisq.generated.protobuffer.PB;
+
+import com.google.protobuf.Message;
+
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

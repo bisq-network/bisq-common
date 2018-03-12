@@ -17,12 +17,12 @@
 
 package bisq.common;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // Helps configure listener objects that are run by the `UserThread` each second
 // and can do per second, per minute and delayed second actions.

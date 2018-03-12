@@ -19,21 +19,27 @@ package bisq.common.locale;
 
 import bisq.common.GlobalSettings;
 import bisq.common.app.DevEnv;
+
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 import java.net.URL;
 import java.net.URLConnection;
+
 import java.text.MessageFormat;
+
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.jetbrains.annotations.NotNull;
 
 public class Res {
     private static final Logger log = LoggerFactory.getLogger(Res.class);

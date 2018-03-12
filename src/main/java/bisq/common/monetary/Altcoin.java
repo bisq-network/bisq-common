@@ -17,12 +17,14 @@
 
 package bisq.common.monetary;
 
-import com.google.common.math.LongMath;
 import org.bitcoinj.core.Monetary;
 import org.bitcoinj.utils.MonetaryFormat;
-import org.jetbrains.annotations.NotNull;
+
+import com.google.common.math.LongMath;
 
 import java.math.BigDecimal;
+
+import org.jetbrains.annotations.NotNull;
 
 import static com.google.common.base.Preconditions.checkArgument;
 

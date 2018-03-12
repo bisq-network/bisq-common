@@ -17,18 +17,22 @@
 
 package bisq.common.proto;
 
-import com.google.common.base.Enums;
+import bisq.common.Proto;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.Message;
-import bisq.common.Proto;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.annotation.Nullable;
+import com.google.common.base.Enums;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import lombok.extern.slf4j.Slf4j;
+
+import javax.annotation.Nullable;
 
 @Slf4j
 public class ProtoUtil {

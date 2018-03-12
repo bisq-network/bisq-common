@@ -17,13 +17,20 @@
 
 package bisq.common.proto.persistable;
 
-import com.google.protobuf.Message;
 import io.bisq.generated.protobuffer.PB;
-import lombok.*;
+
+import com.google.protobuf.Message;
+
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @EqualsAndHashCode
 @AllArgsConstructor

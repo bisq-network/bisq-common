@@ -18,7 +18,7 @@
 package bisq.common;
 
 import bisq.common.locale.TradeCurrency;
-import bisq.common.locale.TradeCurrency;
+
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

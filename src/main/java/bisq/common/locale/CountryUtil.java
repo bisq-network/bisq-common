@@ -17,13 +17,22 @@
 
 package bisq.common.locale;
 
+import bisq.common.GlobalSettings;
+
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import bisq.common.GlobalSettings;
-import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class CountryUtil {

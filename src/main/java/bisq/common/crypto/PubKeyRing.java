@@ -17,19 +17,25 @@
 
 package bisq.common.crypto;
 
-import com.google.common.annotations.VisibleForTesting;
-import com.google.protobuf.ByteString;
 import bisq.common.consensus.UsedForTradeContractJson;
 import bisq.common.proto.network.NetworkPayload;
 import bisq.common.util.Utilities;
+
 import io.bisq.generated.protobuffer.PB;
+
+import com.google.protobuf.ByteString;
+
+import com.google.common.annotations.VisibleForTesting;
+
+import org.bouncycastle.openpgp.PGPPublicKey;
+
+import java.security.PublicKey;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.bouncycastle.openpgp.PGPPublicKey;
 
 import javax.annotation.Nullable;
-import java.security.PublicKey;
 
 /**
  * Same as KeyRing but with public keys only.

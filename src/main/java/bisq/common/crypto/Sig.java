@@ -17,15 +17,27 @@
 
 package bisq.common.crypto;
 
-import com.google.common.base.Charsets;
 import bisq.common.util.Utilities;
-import org.bouncycastle.util.encoders.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.security.*;
+import com.google.common.base.Charsets;
+
+import org.bouncycastle.util.encoders.Base64;
+
+import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * StorageSignatureKeyPair/STORAGE_SIGN_KEY_ALGO: That is used for signing the data to be stored to the P2P network (by flooding).

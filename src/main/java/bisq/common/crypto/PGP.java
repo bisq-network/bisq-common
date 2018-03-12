@@ -17,24 +17,33 @@
 
 package bisq.common.crypto;
 
-import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.bcpg.BCPGKey;
 import org.bouncycastle.bcpg.RSAPublicBCPGKey;
-import org.bouncycastle.openpgp.*;
+import org.bouncycastle.openpgp.PGPException;
+import org.bouncycastle.openpgp.PGPKeyPair;
+import org.bouncycastle.openpgp.PGPPublicKey;
+import org.bouncycastle.openpgp.PGPPublicKeyRing;
+import org.bouncycastle.openpgp.PGPUtil;
 import org.bouncycastle.openpgp.jcajce.JcaPGPPublicKeyRingCollection;
 import org.bouncycastle.util.encoders.Hex;
-import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPublicKeySpec;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import java.util.Iterator;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 @SuppressWarnings("UnusedAssignment")
 @Slf4j

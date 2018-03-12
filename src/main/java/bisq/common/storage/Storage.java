@@ -17,16 +17,20 @@
 
 package bisq.common.storage;
 
-import com.google.inject.Inject;
 import bisq.common.proto.persistable.PersistableEnvelope;
 import bisq.common.proto.persistable.PersistenceProtoResolver;
+
+import com.google.inject.Inject;
+
+import javax.inject.Named;
+
+import java.io.File;
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
-import javax.inject.Named;
-import java.io.File;
-import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

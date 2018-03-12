@@ -18,26 +18,43 @@
 package bisq.common.crypto;
 
 import bisq.common.storage.FileUtil;
-import com.google.inject.Inject;
-import bisq.common.storage.FileUtil;
-import org.bouncycastle.openpgp.PGPKeyPair;
-import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
+import com.google.inject.Inject;
+
 import javax.inject.Named;
+
+import org.bouncycastle.openpgp.PGPKeyPair;
+
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.interfaces.DSAParams;
+import java.security.interfaces.DSAPrivateKey;
+import java.security.interfaces.RSAPrivateCrtKey;
+import java.security.spec.DSAPublicKeySpec;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.RSAPublicKeySpec;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.security.*;
-import java.security.interfaces.DSAParams;
-import java.security.interfaces.DSAPrivateKey;
-import java.security.interfaces.RSAPrivateCrtKey;
-import java.security.spec.*;
+
 import java.util.Date;
+
+import java.math.BigInteger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 // TODO: use a password protection for key storage
 public class KeyStorage {

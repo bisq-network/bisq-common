@@ -18,13 +18,13 @@
 package bisq.common.taskrunner;
 
 import bisq.common.handlers.ErrorMessageHandler;
-import bisq.common.handlers.ErrorMessageHandler;
 import bisq.common.handlers.ResultHandler;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class TaskRunner<T extends Model> {

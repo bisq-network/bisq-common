@@ -18,12 +18,14 @@
 package bisq.common.monetary;
 
 import bisq.common.locale.CurrencyUtil;
-import bisq.common.locale.CurrencyUtil;
+
 import org.bitcoinj.core.Monetary;
 import org.bitcoinj.utils.Fiat;
-import org.jetbrains.annotations.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.jetbrains.annotations.NotNull;
 
 public class Volume extends MonetaryWrapper implements Comparable<Volume> {
     private static final Logger log = LoggerFactory.getLogger(Volume.class);

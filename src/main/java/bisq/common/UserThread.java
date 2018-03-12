@@ -18,14 +18,17 @@
 package bisq.common;
 
 import com.google.common.util.concurrent.MoreExecutors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.InvocationTargetException;
-import java.time.Duration;
 import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
+
+import java.time.Duration;
+
+import java.lang.reflect.InvocationTargetException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // Helps run delayed and periodic actions in the caller thread.
 public class UserThread {

@@ -19,17 +19,21 @@ package bisq.common.storage;
 
 import bisq.common.UserThread;
 import bisq.common.util.Utilities;
-import lombok.extern.slf4j.Slf4j;
+
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import java.nio.file.Paths;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
+
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class JsonFileManager {

@@ -17,10 +17,12 @@
 
 package bisq.common.app;
 
-import com.google.common.base.Preconditions;
+import org.springframework.core.env.Environment;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
-import org.springframework.core.env.Environment;
+
+import com.google.common.base.Preconditions;
 
 import java.util.ArrayList;
 import java.util.List;

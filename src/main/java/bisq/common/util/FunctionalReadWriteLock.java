@@ -17,13 +17,13 @@
 
 package bisq.common.util;
 
-import lombok.Getter;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Supplier;
+
+import lombok.Getter;
 
 public class FunctionalReadWriteLock {
     @Getter

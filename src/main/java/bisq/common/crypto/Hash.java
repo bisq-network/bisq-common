@@ -17,14 +17,17 @@
 
 package bisq.common.crypto;
 
-import com.google.common.base.Charsets;
-import lombok.extern.slf4j.Slf4j;
 import org.bitcoinj.core.Utils;
 
-import java.nio.ByteBuffer;
+import com.google.common.base.Charsets;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+
+import java.nio.ByteBuffer;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Hash {
