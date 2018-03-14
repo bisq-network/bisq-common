@@ -19,11 +19,11 @@ package bisq.common;
 
 import com.google.common.util.concurrent.MoreExecutors;
 
+import java.time.Duration;
+
 import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
-
-import java.time.Duration;
 
 import java.lang.reflect.InvocationTargetException;
 
