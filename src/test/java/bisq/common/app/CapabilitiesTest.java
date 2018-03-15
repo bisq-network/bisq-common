@@ -49,7 +49,7 @@ public class CapabilitiesTest {
         assertTrue(Capabilities.isCapabilitySupported(Arrays.asList(0), Arrays.asList(0, 1)));
         assertFalse(Capabilities.isCapabilitySupported(Arrays.asList(0), Arrays.asList(1, 2)));
         assertTrue(Capabilities.isCapabilitySupported(Arrays.asList(0, 1), Arrays.asList(0, 1)));
-        assertTrue(Capabilities.isCapabilitySupported(Arrays.asList(0, 1), Arrays.asList(1,0)));
+        assertTrue(Capabilities.isCapabilitySupported(Arrays.asList(0, 1), Arrays.asList(1, 0)));
         assertFalse(Capabilities.isCapabilitySupported(Arrays.asList(0, 1), Arrays.asList(0)));
     }
 }
