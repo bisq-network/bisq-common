@@ -345,6 +345,7 @@ message StoragePayload {
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
         CompensationRequestPayload compensation_request_payload = 8; // deprecated. Not used anymore.
+        ProposalPayload proposal_payload = 9;
     }
 }
 
@@ -352,7 +353,6 @@ message PersistableNetworkPayload {
     oneof message {
         AccountAgeWitness account_age_witness = 1;
         TradeStatistics2 trade_statistics2 = 2;
-        ProposalPayload proposal_payload = 3;
     }
 }
 
