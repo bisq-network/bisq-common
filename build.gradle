@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven'
+    id "com.google.protobuf" version "0.8.5"
 }
 
 group = 'network.bisq'
