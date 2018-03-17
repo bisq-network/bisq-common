@@ -12,8 +12,8 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
-    maven { url "https://jitpack.io" }
-    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url 'https://jitpack.io' }
+    maven { url 'http://repo.maven.apache.org/maven2' }
 }
 
 dependencies {
