@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'maven'
     id 'com.google.protobuf' version '0.8.5'
+    id 'io.franzbecker.gradle-lombok' version '1.12'
 }
 
 group = 'network.bisq'
@@ -60,5 +61,4 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'
-    compileOnly 'org.projectlombok:lombok:1.16.16'
 }
