@@ -19,13 +19,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir "$buildDir/generated/source/proto/main/java"
-        }
-    }
-}
+sourceSets.main.java.srcDir "$buildDir/generated/source/proto/main/java"
 
 protobuf {
     protoc {
