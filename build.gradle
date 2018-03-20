@@ -8,6 +8,10 @@ plugins {
 group = 'network.bisq'
 version = '-SNAPSHOT'
 
+ext {
+    protobufVersion = '3.5.1'
+}
+
 sourceCompatibility = 1.8
 
 tasks.withType(JavaCompile) {
@@ -23,12 +27,12 @@ sourceSets.main.java.srcDir "$buildDir/generated/source/proto/main/java"
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.5.1'
+        artifact = "com.google.protobuf:protoc:$protobufVersion"
     }
 }
 
 dependencies {
-    compile 'com.google.protobuf:protobuf-java:3.5.1'
+    compile "com.google.protobuf:protobuf-java:$protobufVersion"
     compile 'com.google.code.gson:gson:2.7'
     compile('com.googlecode.json-simple:json-simple:1.1.1') {
         exclude(module: 'junit')
