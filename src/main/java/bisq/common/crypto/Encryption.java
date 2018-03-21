@@ -25,6 +25,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
@@ -77,7 +78,7 @@ public class Encryption {
     // Symmetric
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    private static byte[] encrypt(byte[] payload, SecretKey secretKey) throws CryptoException {
+    public static byte[] encrypt(byte[] payload, SecretKey secretKey) throws CryptoException {
         try {
             Cipher cipher = Cipher.getInstance(SYM_CIPHER, "BC");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -88,7 +89,7 @@ public class Encryption {
         }
     }
 
-    private static byte[] decrypt(byte[] encryptedPayload, SecretKey secretKey) throws CryptoException {
+    public static byte[] decrypt(byte[] encryptedPayload, SecretKey secretKey) throws CryptoException {
         try {
             Cipher cipher = Cipher.getInstance(SYM_CIPHER, "BC");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
@@ -97,6 +98,11 @@ public class Encryption {
             throw new CryptoException(e);
         }
     }
+
+    public static SecretKey getSecretKeyFromBytes(byte[] secretKeyBytes) {
+        return new SecretKeySpec(secretKeyBytes, 0, secretKeyBytes.length, SYM_KEY_ALGO);
+    }
+
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////

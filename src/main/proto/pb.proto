@@ -346,6 +346,7 @@ message StoragePayload {
         OfferPayload offer_payload = 7;
         CompensationRequestPayload compensation_request_payload = 8; // deprecated. Not used anymore.
         ProposalPayload proposal_payload = 9;
+        BlindVote blind_vote = 10;
     }
 }
 
@@ -971,6 +972,7 @@ message PersistableEnvelope {
         PersistableNetworkPayloadList persistable_network_payload_list = 15;
         CompensationRequestList compensation_request_list = 16; // deprecated. Not used anymore.
         ProposalList proposal_list = 17;
+        VoteList vote_list = 18;
     }
 }
 
@@ -1040,6 +1042,10 @@ message PaymentAccountList {
 
 message ProposalList {
     repeated Proposal proposal = 1;
+}
+
+message VoteList {
+    repeated Vote vote = 1;
 }
 
 // deprecated not used anymore
@@ -1346,13 +1352,12 @@ message ProposalPayload {
     string owner_pub_key_as_hex = 9;
     string signature = 10;
     string tx_id = 11;
-    bytes hash = 12;
-    map<string, string> extra_data = 13;
+    map<string, string> extra_data = 12;
     oneof message {
-        CompensationRequestPayload compensation_request_payload = 14;
-        GenericProposalPayload generic_proposal_payload = 15;
-        ChangeParamProposalPayload change_param_proposal_payload = 16;
-        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 17;
+        CompensationRequestPayload compensation_request_payload = 13;
+        GenericProposalPayload generic_proposal_payload = 14;
+        ChangeParamProposalPayload change_param_proposal_payload = 15;
+        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 16;
     }
 }
 
@@ -1374,15 +1379,26 @@ message RemoveAltcoinProposalPayload {
 message Proposal {
     ProposalPayload proposal_payload = 1;
     VoteResult vote_result = 2;
-    bool closed = 3;
-    int64 fee = 4;
-    map<string, string> extra_data = 5;
+    map<string, string> extra_data = 3;
     oneof message {
-        CompensationRequest compensation_request = 6;
-        GenericProposal generic_proposal = 7;
-        ChangeParamProposal change_param_proposal = 8;
-        RemoveAltcoinProposal remove_altcoin_proposal = 9;
+        CompensationRequest compensation_request = 4;
+        GenericProposal generic_proposal = 5;
+        ChangeParamProposal change_param_proposal = 6;
+        RemoveAltcoinProposal remove_altcoin_proposal = 7;
     }
+}
+
+message Vote {
+    ProposalList proposal_list = 1;
+    string secret_key_as_hex = 2;
+    BlindVote blind_vote = 3;
+}
+
+message BlindVote {
+    bytes encrypted_proposal_list = 1;
+    string tx_id = 2;
+    string owner_pub_key_as_hex = 3;
+    map<string, string> extra_data = 4;
 }
 
 message CompensationRequest {

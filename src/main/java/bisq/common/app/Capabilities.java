@@ -36,7 +36,8 @@ public class Capabilities {
         ACCOUNT_AGE_WITNESS,
         SEED_NODE,
         DAO_FULL_NODE,
-        COMP_REQUEST
+        COMP_REQUEST,
+        VOTE
     }
 
     // Application need to set supported capabilities at startup
