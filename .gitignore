@@ -4,6 +4,7 @@ build
 
 # IDEA
 .idea
+out
 *.iml
 
 # macOS
