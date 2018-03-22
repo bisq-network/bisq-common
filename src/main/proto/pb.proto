@@ -442,6 +442,8 @@ enum TxOutputType {
     VOTE_STAKE_OUTPUT = 6;
     VOTE_OP_RETURN_OUTPUT = 7;
     VOTE_REVEAL_OP_RETURN_OUTPUT = 8;
+    BOND_LOCK = 9;
+    BOND_UNLOCK = 10;
 }
 
 message TxOutput {
@@ -1393,6 +1395,7 @@ message Vote {
     ProposalList proposal_list = 1;
     string secret_key_as_hex = 2;
     BlindVote blind_vote = 3;
+    int64 date = 4;
 }
 
 message BlindVote {
