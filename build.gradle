@@ -52,9 +52,8 @@ dependencies {
         exclude(module: 'protobuf-java')
     }
     compile 'org.jetbrains:annotations:13.0'
-    compile 'org.bouncycastle:bcprov-jdk15on:1.56'
+    runtime 'org.bouncycastle:bcprov-jdk15on:1.56'
     compile 'org.bouncycastle:bcpg-jdk15on:1.56'
-    compile 'org.bouncycastle:bcpg-jdk16:1.46'
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.4'
     compileOnly 'org.projectlombok:lombok:1.16.16'
