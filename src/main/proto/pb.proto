@@ -1396,15 +1396,15 @@ message Vote {
     string secret_key_as_hex = 2;
     BlindVote blind_vote = 3;
     int64 date = 4;
-    int64 stake = 5;
-    string reveal_tx_id = 6;
+    string reveal_tx_id = 5;
 }
 
 message BlindVote {
     bytes encrypted_proposal_list = 1;
     string tx_id = 2;
-    string owner_pub_key_as_hex = 3;
-    map<string, string> extra_data = 4;
+    int64 stake = 3;
+    string owner_pub_key_as_hex = 4;
+    map<string, string> extra_data = 5;
 }
 
 message CompensationRequest {
