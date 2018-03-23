@@ -1396,6 +1396,8 @@ message Vote {
     string secret_key_as_hex = 2;
     BlindVote blind_vote = 3;
     int64 date = 4;
+    int64 stake = 5;
+    string reveal_tx_id = 6;
 }
 
 message BlindVote {
