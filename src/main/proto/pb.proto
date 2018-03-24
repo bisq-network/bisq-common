@@ -975,7 +975,7 @@ message PersistableEnvelope {
         PersistableNetworkPayloadList persistable_network_payload_list = 15;
         CompensationRequestList compensation_request_list = 16; // deprecated. Not used anymore.
         ProposalList proposal_list = 17;
-        VoteList vote_list = 18;
+        MyVoteList my_vote_list = 18;
     }
 }
 
@@ -1047,8 +1047,8 @@ message ProposalList {
     repeated Proposal proposal = 1;
 }
 
-message VoteList {
-    repeated Vote vote = 1;
+message MyVoteList {
+    repeated MyVote my_vote = 1;
 }
 
 // deprecated not used anymore
@@ -1391,7 +1391,7 @@ message Proposal {
     }
 }
 
-message Vote {
+message MyVote {
     ProposalList proposal_list = 1;
     string secret_key_as_hex = 2;
     BlindVote blind_vote = 3;
@@ -1405,6 +1405,12 @@ message BlindVote {
     int64 stake = 3;
     string owner_pub_key_as_hex = 4;
     map<string, string> extra_data = 5;
+}
+
+message RevealedVote {
+    ProposalList proposal_list = 1;
+    BlindVote blind_vote = 2;
+    string reveal_tx_id = 3;
 }
 
 message CompensationRequest {
