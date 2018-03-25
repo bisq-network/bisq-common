@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -51,7 +50,7 @@ public class PersistableList<T extends PersistablePayload> implements Persistabl
     }
 
     public PersistableList(HashSet<T> set) {
-        this(set.stream().collect(Collectors.toList()));
+        this(new ArrayList<>(set));
     }
 
     public PersistableList(HashSet<T> set, Function<List<T>, Message> toProto) {
