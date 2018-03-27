@@ -491,9 +491,10 @@ message Tx {
 
 message BsqBlock {
     int32 height = 1;
-    string hash = 2;
-    string previous_block_hash = 3;
-    repeated Tx txs = 4;
+    int64 time = 2;
+    string hash = 3;
+    string previous_block_hash = 4;
+    repeated Tx txs = 5;
 }
 
 message TxIdIndexTuple {
@@ -976,6 +977,7 @@ message PersistableEnvelope {
         CompensationRequestList compensation_request_list = 16; // deprecated. Not used anymore.
         ProposalList proposal_list = 17;
         MyVoteList my_vote_list = 18;
+        BlindVoteList blind_vote_list = 19;
     }
 }
 
@@ -1049,6 +1051,10 @@ message ProposalList {
 
 message MyVoteList {
     repeated MyVote my_vote = 1;
+}
+
+message BlindVoteList {
+    repeated BlindVote blind_vote = 1;
 }
 
 // deprecated not used anymore
