@@ -421,8 +421,8 @@ message PubKeyScript {
 }
 
 message TxInput {
-    string tx_id = 1;
-    int32 tx_output_index = 2;
+    string connected_tx_output_tx_id = 1;
+    int32 connected_tx_output_index = 2;
     TxOutput connected_tx_output = 3;
 }
 
