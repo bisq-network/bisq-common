@@ -421,8 +421,8 @@ message PubKeyScript {
 }
 
 message TxInput {
-    string tx_id = 1;
-    int32 tx_output_index = 2;
+    string connected_tx_output_tx_id = 1;
+    int32 connected_tx_output_index = 2;
     TxOutput connected_tx_output = 3;
 }
 
@@ -437,10 +437,10 @@ enum TxOutputType {
     UNDEFINED = 1;
     BSQ_OUTPUT = 2;
     BTC_OUTPUT = 3;
-    COMPENSATION_REQUEST_OP_RETURN_OUTPUT = 4;
-    COMPENSATION_REQUEST_ISSUANCE_CANDIDATE_OUTPUT = 5;
-    VOTE_STAKE_OUTPUT = 6;
-    VOTE_OP_RETURN_OUTPUT = 7;
+    COMP_REQ_OP_RETURN_OUTPUT = 4;
+    ISSUANCE_CANDIDATE_OUTPUT = 5;
+    BLIND_VOTE_STAKE_OUTPUT = 6;
+    BLIND_VOTE_OP_RETURN_OUTPUT = 7;
     VOTE_REVEAL_OP_RETURN_OUTPUT = 8;
     BOND_LOCK = 9;
     BOND_UNLOCK = 10;
@@ -470,7 +470,7 @@ enum TxType {
     PAY_TRADE_FEE = 6;
     COMPENSATION_REQUEST = 7;
     PROPOSAL = 8;
-    VOTE = 9;
+    BLIND_VOTE = 9;
     VOTE_REVEAL = 10;
     ISSUANCE = 11;
     LOCK_UP = 12;
