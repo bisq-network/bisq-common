@@ -470,7 +470,7 @@ enum TxType {
     PAY_TRADE_FEE = 6;
     COMPENSATION_REQUEST = 7;
     PROPOSAL = 8;
-    VOTE = 9;
+    BLIND_VOTE = 9;
     VOTE_REVEAL = 10;
     ISSUANCE = 11;
     LOCK_UP = 12;
