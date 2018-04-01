@@ -1361,7 +1361,7 @@ message ProposalPayload {
     string description = 6;
     string link = 7;
     string node_address = 8;
-    string owner_pub_key_as_hex = 9;
+    bytes owner_pub_key_encoded = 9;
     string tx_id = 10;
     map<string, string> extra_data = 11;
     oneof message {
