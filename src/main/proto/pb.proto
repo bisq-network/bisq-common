@@ -438,14 +438,18 @@ enum TxOutputType {
     GENESIS_OUTPUT = 2;
     BSQ_OUTPUT = 3;
     BTC_OUTPUT = 4;
-    COMP_REQ_OP_RETURN_OUTPUT = 5;
-    ISSUANCE_CANDIDATE_OUTPUT = 6;
-    BLIND_VOTE_LOCK_STAKE_OUTPUT = 7;
-    BLIND_VOTE_OP_RETURN_OUTPUT = 8;
-    VOTE_REVEAL_UNLOCK_STAKE_OUTPUT = 9;
-    VOTE_REVEAL_OP_RETURN_OUTPUT = 10;
-    BOND_LOCK = 11;
-    BOND_UNLOCK = 12;
+    PROPOSAL_OP_RETURN_OUTPUT = 5;
+    COMP_REQ_OP_RETURN_OUTPUT = 6;
+    ISSUANCE_CANDIDATE_OUTPUT = 7;
+    BLIND_VOTE_LOCK_STAKE_OUTPUT = 8;
+    BLIND_VOTE_OP_RETURN_OUTPUT = 9;
+    VOTE_REVEAL_UNLOCK_STAKE_OUTPUT = 10;
+    VOTE_REVEAL_OP_RETURN_OUTPUT = 11;
+    BOND_LOCK = 12;
+    BOND_LOCK_OP_RETURN_OUTPUT = 13;
+    BOND_UNLOCK = 14;
+    BOND_UNLOCK_OP_RETURN_OUTPUT = 15;
+    INVALID = 16;
 }
 
 message TxOutput {
@@ -1401,7 +1405,7 @@ message Proposal {
 
 message MyVote {
     ProposalList proposal_list = 1;
-    string secret_key_as_hex = 2;
+    bytes secret_key_encoded = 2;
     BlindVote blind_vote = 3;
     int64 date = 4;
     string reveal_tx_id = 5;
@@ -1411,7 +1415,7 @@ message BlindVote {
     bytes encrypted_proposal_list = 1;
     string tx_id = 2;
     int64 stake = 3;
-    string owner_pub_key_as_hex = 4;
+    bytes owner_pub_key_as_encoded = 4;
     map<string, string> extra_data = 5;
 }
 

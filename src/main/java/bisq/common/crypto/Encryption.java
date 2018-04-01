@@ -103,6 +103,9 @@ public class Encryption {
         return new SecretKeySpec(secretKeyBytes, 0, secretKeyBytes.length, SYM_KEY_ALGO);
     }
 
+    public static byte[] getSecretKeyBytes(SecretKey secretKey) {
+        return secretKey.getEncoded();
+    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////
