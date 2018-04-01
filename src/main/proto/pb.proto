@@ -1362,14 +1362,13 @@ message ProposalPayload {
     string link = 7;
     string node_address = 8;
     string owner_pub_key_as_hex = 9;
-    string signature = 10;
-    string tx_id = 11;
-    map<string, string> extra_data = 12;
+    string tx_id = 10;
+    map<string, string> extra_data = 11;
     oneof message {
-        CompensationRequestPayload compensation_request_payload = 13;
-        GenericProposalPayload generic_proposal_payload = 14;
-        ChangeParamProposalPayload change_param_proposal_payload = 15;
-        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 16;
+        CompensationRequestPayload compensation_request_payload = 12;
+        GenericProposalPayload generic_proposal_payload = 13;
+        ChangeParamProposalPayload change_param_proposal_payload = 14;
+        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 15;
     }
 }
 
