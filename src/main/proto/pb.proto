@@ -449,7 +449,7 @@ enum TxOutputType {
     BOND_LOCK_OP_RETURN_OUTPUT = 13;
     BOND_UNLOCK = 14;
     BOND_UNLOCK_OP_RETURN_OUTPUT = 15;
-    INVALID = 16;
+    INVALID_OUTPUT = 16;
 }
 
 message TxOutput {
