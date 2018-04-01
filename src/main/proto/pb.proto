@@ -474,8 +474,8 @@ enum TxType {
     GENESIS = 4;
     TRANSFER_BSQ = 5;
     PAY_TRADE_FEE = 6;
-    COMPENSATION_REQUEST = 7;
-    PROPOSAL = 8;
+    PROPOSAL = 7;
+    COMPENSATION_REQUEST = 8;
     BLIND_VOTE = 9;
     VOTE_REVEAL = 10;
     LOCK_UP = 11;
