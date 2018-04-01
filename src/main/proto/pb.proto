@@ -474,9 +474,8 @@ enum TxType {
     PROPOSAL = 8;
     BLIND_VOTE = 9;
     VOTE_REVEAL = 10;
-    ISSUANCE = 11;
-    LOCK_UP = 12;
-    UN_LOCK = 13;
+    LOCK_UP = 11;
+    UN_LOCK = 12;
 }
 
 message Tx {
@@ -489,6 +488,8 @@ message Tx {
     repeated TxOutput outputs = 7;
     int64 burnt_fee = 8;
     TxType tx_type = 9;
+    bool is_ssuance_tx = 10;
+    int32 issuance_block_height = 11;
 }
 
 message BsqBlock {
