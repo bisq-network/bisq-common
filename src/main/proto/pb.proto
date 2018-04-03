@@ -1440,7 +1440,7 @@ message RemoveAltcoinProposal {
 message VoteResult {
     oneof message {
         BooleanVoteResult boolean_vote_result = 1;
-        IntegerVoteResult integer_vote_result = 2;
+        LongVoteResult long_vote_result = 2;
     }
 }
 
@@ -1448,8 +1448,8 @@ message BooleanVoteResult {
     bool accepted = 1;
 }
 
-message IntegerVoteResult {
-    uint32 value = 1;
+message LongVoteResult {
+    uint64 value = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
