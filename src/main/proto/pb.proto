@@ -848,6 +848,7 @@ message BankAccountPayload {
         SameBankAccountPayload same_bank_accont_payload = 10;
         SpecificBanksAccountPayload specific_banks_account_payload = 11;
     }
+    string national_account_id = 12;
 }
 
 message NationalBankAccountPayload {
