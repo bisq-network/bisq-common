@@ -848,6 +848,7 @@ message BankAccountPayload {
         SameBankAccountPayload same_bank_accont_payload = 10;
         SpecificBanksAccountPayload specific_banks_account_payload = 11;
     }
+    string national_account_id = 12;
 }
 
 message NationalBankAccountPayload {
@@ -870,6 +871,7 @@ message CashDepositAccountPayload {
     string account_type = 7;
     string requirements = 8;
     string holder_tax_id = 9;
+    string national_account_id = 10;
 }
 
 message WesternUnionAccountPayload {
