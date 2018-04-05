@@ -220,15 +220,10 @@ public class Encryption {
     // Hybrid with signature of asymmetric key
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    // Private
-    ///////////////////////////////////////////////////////////////////////////////////////////
-
-    public static SecretKey generateSecretKey() {
+    public static SecretKey generateSecretKey(int bits) {
         try {
             KeyGenerator keyPairGenerator = KeyGenerator.getInstance(SYM_KEY_ALGO, "BC");
-            keyPairGenerator.init(256);
+            keyPairGenerator.init(bits);
             return keyPairGenerator.generateKey();
         } catch (Throwable e) {
             e.printStackTrace();
