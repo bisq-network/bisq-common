@@ -985,6 +985,7 @@ message PersistableEnvelope {
         ProposalList proposal_list = 17;
         MyVoteList my_vote_list = 18;
         BlindVoteList blind_vote_list = 19;
+        ParamChangeEventList param_change_event_list = 20;
     }
 }
 
@@ -1062,6 +1063,10 @@ message MyVoteList {
 
 message BlindVoteList {
     repeated BlindVote blind_vote = 1;
+}
+
+message ParamChangeEventList {
+    repeated ParamChangeEvent param_change_event = 1;
 }
 
 // deprecated not used anymore
@@ -1408,6 +1413,13 @@ message MyVote {
     BlindVote blind_vote = 3;
     int64 date = 4;
     string reveal_tx_id = 5;
+}
+
+message ParamChangeEvent {
+    // We use odingal instead of Enum as enaums in PB are a pain... as well we want to be more flexible at changes
+    int32 dao_param_ordinal = 1;
+    int64 value = 2;
+    int32 block_height = 3;
 }
 
 message BlindVote {
