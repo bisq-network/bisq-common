@@ -1366,15 +1366,14 @@ message ProposalPayload {
     string title = 5;
     string description = 6;
     string link = 7;
-    string node_address = 8;
-    bytes owner_pub_key_encoded = 9;
-    string tx_id = 10;
-    map<string, string> extra_data = 11;
+    bytes owner_pub_key_encoded = 8;
+    string tx_id = 9;
+    map<string, string> extra_data = 10;
     oneof message {
-        CompensationRequestPayload compensation_request_payload = 12;
-        GenericProposalPayload generic_proposal_payload = 13;
-        ChangeParamProposalPayload change_param_proposal_payload = 14;
-        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 15;
+        CompensationRequestPayload compensation_request_payload = 11;
+        GenericProposalPayload generic_proposal_payload = 12;
+        ChangeParamProposalPayload change_param_proposal_payload = 13;
+        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 14;
     }
 }
 
@@ -1442,7 +1441,7 @@ message RemoveAltcoinProposal {
 message VoteResult {
     oneof message {
         BooleanVoteResult boolean_vote_result = 1;
-        IntegerVoteResult integer_vote_result = 2;
+        LongVoteResult long_vote_result = 2;
     }
 }
 
@@ -1450,8 +1449,8 @@ message BooleanVoteResult {
     bool accepted = 1;
 }
 
-message IntegerVoteResult {
-    uint32 value = 1;
+message LongVoteResult {
+    uint64 value = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

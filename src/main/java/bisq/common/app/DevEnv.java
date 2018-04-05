@@ -17,6 +17,9 @@
 
 package bisq.common.app;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class DevEnv {
     // Was used for P2P network stress test to adjust several setting for the tests (e.g. use lower btc fees for offers,..)
     public static final boolean STRESS_TEST_MODE = false;
@@ -44,4 +47,10 @@ public class DevEnv {
 
     public static final boolean DAO_PHASE2_ACTIVATED = false;
     public static final boolean DAO_TRADING_ACTIVATED = false;
+
+    public static void logErrorAndThrowIfDevMode(String msg) {
+        log.error(msg);
+        if (devMode)
+            throw new RuntimeException(msg);
+    }
 }
