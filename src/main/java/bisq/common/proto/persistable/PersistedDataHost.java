@@ -17,6 +17,12 @@
 
 package bisq.common.proto.persistable;
 
+import java.util.List;
+
 public interface PersistedDataHost {
     void readPersisted();
+
+    static void apply(List<PersistedDataHost> persistedDataHosts) {
+        persistedDataHosts.forEach(PersistedDataHost::readPersisted);
+    }
 }
