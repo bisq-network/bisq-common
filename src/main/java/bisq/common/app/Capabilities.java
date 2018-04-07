@@ -43,7 +43,11 @@ public class Capabilities {
     // Application need to set supported capabilities at startup
     @Getter
     @Setter
-    private static ArrayList<Integer> supportedCapabilities = new ArrayList<>();
+    private static List<Integer> supportedCapabilities = new ArrayList<>();
+
+    public static void addCapability(int capability) {
+        supportedCapabilities.add(capability);
+    }
 
     public static boolean isCapabilitySupported(final List<Integer> requiredItems, final List<Integer> supportedItems) {
         if (requiredItems != null && !requiredItems.isEmpty()) {
