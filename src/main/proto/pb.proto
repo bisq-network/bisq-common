@@ -805,11 +805,16 @@ message PaymentAccountPayload {
         VenmoAccountPayload venmo_account_payload = 19;
         PopmoneyAccountPayload popmoney_account_payload = 20;
         RevolutAccountPayload revolut_account_payload = 21;
+        WechatPayAccountPayload wechat_pay_account_payload = 22;
     }
     map<string, string> exclude_from_json_data = 15;
 }
 
 message AliPayAccountPayload {
+    string account_nr = 1;
+}
+
+message WechatPayAccountPayload {
     string account_nr = 1;
 }
 
