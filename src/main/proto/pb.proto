@@ -1399,7 +1399,7 @@ message RemoveAltcoinProposalPayload {
 
 message Proposal {
     ProposalPayload proposal_payload = 1;
-    VoteResult vote_result = 2;
+    Vote vote = 2;
     map<string, string> extra_data = 3;
     oneof message {
         CompensationRequest compensation_request = 4;
@@ -1450,18 +1450,18 @@ message ChangeParamProposal {
 message RemoveAltcoinProposal {
 }
 
-message VoteResult {
+message Vote {
     oneof message {
-        BooleanVoteResult boolean_vote_result = 1;
-        LongVoteResult long_vote_result = 2;
+        BooleanVote boolean_vote = 1;
+        LongVote long_vote = 2;
     }
 }
 
-message BooleanVoteResult {
+message BooleanVote {
     bool accepted = 1;
 }
 
-message LongVoteResult {
+message LongVote {
     uint64 value = 1;
 }
 
