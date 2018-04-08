@@ -1432,12 +1432,6 @@ message BlindVote {
     map<string, string> extra_data = 5;
 }
 
-message RevealedVote {
-    ProposalList proposal_list = 1;
-    BlindVote blind_vote = 2;
-    string reveal_tx_id = 3;
-}
-
 message CompensationRequest {
 }
 
