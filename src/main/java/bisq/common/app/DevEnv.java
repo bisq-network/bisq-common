@@ -17,10 +17,20 @@
 
 package bisq.common.app;
 
+import bisq.common.CommonOptionKeys;
+
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.name.Names;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DevEnv {
+    public static void setup(Injector injector) {
+        DevEnv.setDevMode(injector.getInstance(Key.get(Boolean.class, Names.named(CommonOptionKeys.USE_DEV_MODE))));
+    }
+
     // Was used for P2P network stress test to adjust several setting for the tests (e.g. use lower btc fees for offers,..)
     public static final boolean STRESS_TEST_MODE = false;
 
