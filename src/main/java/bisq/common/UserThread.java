@@ -30,6 +30,8 @@ import java.lang.reflect.InvocationTargetException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import lombok.Getter;
+
 // Helps run delayed and periodic actions in the caller thread.
 public class UserThread {
     private static final Logger log = LoggerFactory.getLogger(UserThread.class);
@@ -53,6 +55,7 @@ public class UserThread {
         timerClass = FrameRateTimer.class;
     }
 
+    @Getter
     private static Executor executor;
 
     public static void execute(Runnable command) {
