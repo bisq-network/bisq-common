@@ -423,7 +423,6 @@ message PubKeyScript {
 message TxInput {
     string connected_tx_output_tx_id = 1;
     int32 connected_tx_output_index = 2;
-    TxOutput connected_tx_output = 3;
 }
 
 message SpentInfo {
@@ -460,10 +459,6 @@ message TxOutput {
     string address = 5;
     bytes op_return_data = 6;
     int32 block_height = 7;
-    bool is_unspent = 8;
-    bool is_verified = 9;
-    TxOutputType tx_output_type = 10;
-    SpentInfo spent_info = 11;
 }
 
 enum TxType {
@@ -490,10 +485,6 @@ message Tx {
     int64 time = 5;
     repeated TxInput inputs = 6;
     repeated TxOutput outputs = 7;
-    int64 burnt_fee = 8;
-    TxType tx_type = 9;
-    bool is_ssuance_tx = 10;
-    int32 issuance_block_height = 11;
 }
 
 message BsqBlock {
