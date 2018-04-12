@@ -495,10 +495,6 @@ message BsqBlock {
     repeated Tx txs = 5;
 }
 
-message TxIdIndexTuple {
-    string tx_id = 1;
-    int32 index = 2;
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Storage payload
