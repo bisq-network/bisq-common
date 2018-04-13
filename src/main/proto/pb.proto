@@ -980,7 +980,7 @@ message PersistableEnvelope {
         ProposalList proposal_list = 17;
         MyVoteList my_vote_list = 18;
         BlindVoteList blind_vote_list = 19;
-        ChangeParamEventList change_param_event_list = 20;
+        /*ChangeParamEventList change_param_event_list = 20;*/
     }
 }
 
