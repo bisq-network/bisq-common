@@ -1416,7 +1416,7 @@ message ChangeParamPayload {
     int64 value = 2;
 }
 
-message ChangeParamEvent {
+message AddChangeParamEvent {
     // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
     ChangeParamPayload change_param_payload = 1;
     int32 height = 2;
