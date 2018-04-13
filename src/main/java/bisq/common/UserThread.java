@@ -27,23 +27,26 @@ import java.util.concurrent.TimeUnit;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
-// Helps run delayed and periodic actions in the caller thread.
+
+/**
+ * Defines which thread is used as user thread. The user thread is the the main thread in the single threaded context.
+ * For JavaFX it is usually the Platform::RunLater executor, for a headless application it it any single threaded
+ * executor.
+ * Additionally sets a timer class so JavaFX and headless applications can set different timers (UITimer for JavaFX
+ * otherwise we use teh default FrameRateTimer).
+ * <p>
+ * Provides also methods for delayed and periodic executions.
+ */
+@Slf4j
 public class UserThread {
-    private static final Logger log = LoggerFactory.getLogger(UserThread.class);
     private static Class<? extends Timer> timerClass;
-
-    public static Executor getExecutor() {
-        return executor;
-    }
-
-    public static void setExecutor(Executor executor) {
-        UserThread.executor = executor;
-    }
+    @Getter
+    @Setter
+    private static Executor executor;
 
     public static void setTimerClass(Class<? extends Timer> timerClass) {
         UserThread.timerClass = timerClass;
@@ -55,8 +58,6 @@ public class UserThread {
         timerClass = FrameRateTimer.class;
     }
 
-    @Getter
-    private static Executor executor;
 
     public static void execute(Runnable command) {
         UserThread.executor.execute(command);
