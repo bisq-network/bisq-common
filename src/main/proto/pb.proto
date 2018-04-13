@@ -347,6 +347,7 @@ message StoragePayload {
         CompensationRequestPayload compensation_request_payload = 8; // deprecated. Not used anymore.
         ProposalPayload proposal_payload = 9;
         BlindVote blind_vote = 10;
+        ChangeParamPayload change_param_vote = 11;
     }
 }
 
@@ -979,7 +980,7 @@ message PersistableEnvelope {
         ProposalList proposal_list = 17;
         MyVoteList my_vote_list = 18;
         BlindVoteList blind_vote_list = 19;
-        ParamChangeEventList param_change_event_list = 20;
+        ChangeParamEventList change_param_event_list = 20;
     }
 }
 
@@ -1059,9 +1060,9 @@ message BlindVoteList {
     repeated BlindVote blind_vote = 1;
 }
 
-message ParamChangeEventList {
-    repeated ParamChangeEvent param_change_event = 1;
-}
+/*message ChangeParamEventList {
+    repeated ChangeParamEvent param_change_event = 1;
+}*/
 
 // deprecated not used anymore
 message CompensationRequestList {
@@ -1409,12 +1410,18 @@ message MyVote {
     string reveal_tx_id = 5;
 }
 
-message ParamChangeEvent {
+message ChangeParamPayload {
     // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
     int32 dao_param_ordinal = 1;
     int64 value = 2;
-    int32 block_height = 3;
 }
+
+message ChangeParamEvent {
+    // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
+    ChangeParamPayload change_param_payload = 1;
+    int32 height = 2;
+}
+
 
 message BlindVote {
     bytes encrypted_proposal_list = 1;
