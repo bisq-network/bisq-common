@@ -22,8 +22,7 @@ package bisq.common;
  */
 public interface ThreadAwareListener {
     // If overwritten and false is returned the caller will map to the userThread, otherwise it will be called directly
-    // from the running thread. We do not user executor.execute() as we don't want to wait until the running task is
-    // completed.
+    // from the running thread.
     default boolean executeOnUserThread() {
         return true;
     }
