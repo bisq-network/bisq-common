@@ -20,11 +20,18 @@ package bisq.common;
 /**
  * Used for supporting to define the thread in which the listener is executed.
  */
-public interface ThreadContextAwareListener {
+public interface ThreadAwareListener {
     // If overwritten and false is returned the caller will map to the userThread, otherwise it will be called directly
     // from the running thread. We do not user executor.execute() as we don't want to wait until the running task is
     // completed.
     default boolean executeOnUserThread() {
         return true;
+    }
+
+    default void execute(Runnable runnable) {
+        if (executeOnUserThread())
+            UserThread.execute(runnable);
+        else
+            runnable.run();
     }
 }
