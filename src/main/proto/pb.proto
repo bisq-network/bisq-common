@@ -344,10 +344,9 @@ message StoragePayload {
 
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
-        CompensationRequestPayload compensation_request_payload = 8; // deprecated. Not used anymore.
-        ProposalPayload proposal_payload = 9;
-        BlindVote blind_vote = 10;
-        ChangeParamPayload change_param_vote = 11;
+        Proposal proposal = 8;
+        BlindVote blind_vote = 9;
+        ChangeParamPayload change_param_vote = 10;
     }
 }
 
@@ -971,16 +970,12 @@ message PersistableEnvelope {
         UserPayload user_payload = 10;
         PaymentAccountList payment_account_list = 11;
 
-        CompensationRequestPayload compensation_request_payload = 12; // deprecated. Not used anymore.
-        VoteItemsList vote_items_list = 13; // deprecated. Not used anymore.
-        BsqBlockChain bsq_block_chain = 14;
+        BsqBlockChain bsq_block_chain = 12;
 
-        PersistableNetworkPayloadList persistable_network_payload_list = 15;
-        CompensationRequestList compensation_request_list = 16; // deprecated. Not used anymore.
-        ProposalList proposal_list = 17;
-        MyVoteList my_vote_list = 18;
-        BlindVoteList blind_vote_list = 19;
-        /*ChangeParamEventList change_param_event_list = 20;*/
+        PersistableNetworkPayloadList persistable_network_payload_list = 13;
+        BallotList ballot_list = 14;
+        MyVoteList my_vote_list = 15;
+        BlindVoteList blind_vote_list = 16;
     }
 }
 
@@ -1048,8 +1043,8 @@ message PaymentAccountList {
     repeated PaymentAccount payment_account = 1;
 }
 
-message ProposalList {
-    repeated Proposal proposal = 1;
+message BallotList {
+    repeated Ballot ballot = 1;
 }
 
 message MyVoteList {
@@ -1064,9 +1059,6 @@ message BlindVoteList {
     repeated ChangeParamEvent param_change_event = 1;
 }*/
 
-// deprecated not used anymore
-message CompensationRequestList {
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Offer/Trade
@@ -1352,11 +1344,7 @@ message BsqBlockChain {
     Tx genesis_tx = 7;
 }
 
-// deprecated. Not used anymore.
-message VoteItemsList {
-}
-
-message ProposalPayload {
+message Proposal {
     uint32 version = 1;
     int64 creation_date = 2;
     string uid = 3;
@@ -1368,42 +1356,42 @@ message ProposalPayload {
     string tx_id = 9;
     map<string, string> extra_data = 10;
     oneof message {
-        CompensationRequestPayload compensation_request_payload = 11;
-        GenericProposalPayload generic_proposal_payload = 12;
-        ChangeParamProposalPayload change_param_proposal_payload = 13;
-        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 14;
+        CompensationRequestProposal compensation_request_proposal = 11;
+        GenericProposal generic_proposal = 12;
+        ChangeParamProposal change_param_proposal = 13;
+        RemoveAltcoinProposal remove_altcoin_proposal = 14;
     }
 }
 
-message CompensationRequestPayload {
+message CompensationRequestProposal {
     int64 requested_bsq = 1;
     string bsq_address = 2;
 }
 
-message GenericProposalPayload {
+message GenericProposal {
 }
 
-message ChangeParamProposalPayload {
+message ChangeParamProposal {
 }
 
-message RemoveAltcoinProposalPayload {
+message RemoveAltcoinProposal {
     string currency_code = 1;
 }
 
-message Proposal {
-    ProposalPayload proposal_payload = 1;
+message Ballot {
+    Proposal proposal = 1;
     Vote vote = 2;
     map<string, string> extra_data = 3;
     oneof message {
-        CompensationRequest compensation_request = 4;
-        GenericProposal generic_proposal = 5;
-        ChangeParamProposal change_param_proposal = 6;
-        RemoveAltcoinProposal remove_altcoin_proposal = 7;
+        CompensationRequestBallot compensation_request_ballot = 4;
+        GenericBallot generic_ballot = 5;
+        ChangeParamBallot change_param_ballot = 6;
+        RemoveAltcoinBallot remove_altcoin_ballot = 7;
     }
 }
 
 message MyVote {
-    ProposalList proposal_list = 1;
+    BallotList ballot_list = 1;
     bytes secret_key_encoded = 2;
     BlindVote blind_vote = 3;
     int64 date = 4;
@@ -1424,23 +1412,23 @@ message AddChangeParamEvent {
 
 
 message BlindVote {
-    bytes encrypted_proposal_list = 1;
+    bytes encrypted_ballot_list = 1;
     string tx_id = 2;
     int64 stake = 3;
     bytes owner_pub_key_as_encoded = 4;
     map<string, string> extra_data = 5;
 }
 
-message CompensationRequest {
+message CompensationRequestBallot {
 }
 
-message GenericProposal {
+message GenericBallot {
 }
 
-message ChangeParamProposal {
+message ChangeParamBallot {
 }
 
-message RemoveAltcoinProposal {
+message RemoveAltcoinBallot {
 }
 
 message Vote {
