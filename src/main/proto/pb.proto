@@ -345,7 +345,7 @@ message StoragePayload {
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
         Proposal proposal = 8;
-        BlindVote blind_vote = 9;
+        BlindVotePayload blind_vote_payload = 9;
         ChangeParamPayload change_param_vote = 10;
     }
 }
@@ -1410,13 +1410,16 @@ message AddChangeParamEvent {
     int32 height = 2;
 }
 
-
 message BlindVote {
     bytes encrypted_ballot_list = 1;
     string tx_id = 2;
     int64 stake = 3;
-    bytes owner_pub_key_as_encoded = 4;
-    map<string, string> extra_data = 5;
+}
+
+message BlindVotePayload {
+    BlindVote blind_vote = 1;
+    bytes owner_pub_key_as_encoded = 2;
+    map<string, string> extra_data = 3;
 }
 
 message CompensationRequestBallot {
