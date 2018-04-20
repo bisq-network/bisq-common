@@ -1356,14 +1356,14 @@ message Proposal {
     string tx_id = 9;
     map<string, string> extra_data = 10;
     oneof message {
-        CompensationRequestProposal compensation_request_proposal = 11;
+        CompensationProposal compensation_proposal = 11;
         GenericProposal generic_proposal = 12;
         ChangeParamProposal change_param_proposal = 13;
         RemoveAltcoinProposal remove_altcoin_proposal = 14;
     }
 }
 
-message CompensationRequestProposal {
+message CompensationProposal {
     int64 requested_bsq = 1;
     string bsq_address = 2;
 }
@@ -1383,7 +1383,7 @@ message Ballot {
     Vote vote = 2;
     map<string, string> extra_data = 3;
     oneof message {
-        CompensationRequestBallot compensation_request_ballot = 4;
+        CompensationBallot compensation_ballot = 4;
         GenericBallot generic_ballot = 5;
         ChangeParamBallot change_param_ballot = 6;
         RemoveAltcoinBallot remove_altcoin_ballot = 7;
@@ -1422,7 +1422,7 @@ message BlindVotePayload {
     map<string, string> extra_data = 3;
 }
 
-message CompensationRequestBallot {
+message CompensationBallot {
 }
 
 message GenericBallot {
