@@ -346,7 +346,7 @@ message StoragePayload {
         OfferPayload offer_payload = 7;
         ProposalPayload proposal_payload = 8;
         BlindVotePayload blind_vote_payload = 9;
-        ChangeParamPayload change_param_vote = 10;
+        ParamChange param_change = 10;
     }
 }
 
@@ -1402,15 +1402,14 @@ message MyVote {
     string reveal_tx_id = 5;
 }
 
-message ChangeParamPayload {
+message ParamChange {
     // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
-    int32 dao_param_ordinal = 1;
+    int32 param_ordinal = 1;
     int64 value = 2;
 }
 
-message AddChangeParamEvent {
-    // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
-    ChangeParamPayload change_param_payload = 1;
+message ParamChangeEvent {
+    ParamChange param_change = 1;
     int32 height = 2;
 }
 
