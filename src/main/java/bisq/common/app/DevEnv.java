@@ -17,20 +17,10 @@
 
 package bisq.common.app;
 
-import bisq.common.CommonOptionKeys;
-
-import com.google.inject.Injector;
-import com.google.inject.Key;
-import com.google.inject.name.Names;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DevEnv {
-    public static void setup(Injector injector) {
-        DevEnv.setDevMode(injector.getInstance(Key.get(Boolean.class, Names.named(CommonOptionKeys.USE_DEV_MODE))));
-    }
-
     // Was used for P2P network stress test to adjust several setting for the tests (e.g. use lower btc fees for offers,..)
     public static final boolean STRESS_TEST_MODE = false;
 
@@ -55,12 +45,31 @@ public class DevEnv {
         DevEnv.devMode = devMode;
     }
 
-    public static final boolean DAO_PHASE2_ACTIVATED = false;
-    public static final boolean DAO_TRADING_ACTIVATED = false;
+    private static final boolean DAO_PHASE2_ACTIVATED = false;
+    private static final boolean DAO_TRADING_ACTIVATED = false;
+
+    private static boolean daoActivated = false;
+
+    public static boolean isDaoActivated() {
+        return daoActivated;
+    }
+
+    public static void setDaoActivated(boolean daoActivated) {
+        DevEnv.daoActivated = daoActivated;
+    }
+
 
     public static void logErrorAndThrowIfDevMode(String msg) {
         log.error(msg);
         if (devMode)
             throw new RuntimeException(msg);
+    }
+
+    public static boolean isDaoPhase2Activated() {
+        return DAO_PHASE2_ACTIVATED || daoActivated;
+    }
+
+    public static boolean isDaoTradingActivated() {
+        return DAO_TRADING_ACTIVATED || daoActivated;
     }
 }
