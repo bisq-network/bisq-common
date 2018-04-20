@@ -1385,12 +1385,11 @@ message ProposalPayload {
 message Ballot {
     Proposal proposal = 1;
     Vote vote = 2;
-    map<string, string> extra_data = 3;
     oneof message {
-        CompensationBallot compensation_ballot = 4;
-        GenericBallot generic_ballot = 5;
-        ChangeParamBallot change_param_ballot = 6;
-        RemoveAltcoinBallot remove_altcoin_ballot = 7;
+        CompensationBallot compensation_ballot = 3;
+        GenericBallot generic_ballot = 4;
+        ChangeParamBallot change_param_ballot = 5;
+        RemoveAltcoinBallot remove_altcoin_ballot = 6;
     }
 }
 
