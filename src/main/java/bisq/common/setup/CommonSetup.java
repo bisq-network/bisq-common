@@ -30,15 +30,13 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 
-import java.util.function.BiConsumer;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class CommonSetup {
 
-    public static void setup(BiConsumer<Throwable, Boolean> errorHandler) {
-        setupErrorHandler(errorHandler);
+    public static void setup(UncaughtExceptionHandler uncaughtExceptionHandler) {
+        setupErrorHandler(uncaughtExceptionHandler);
 
         Security.addProvider(new BouncyCastleProvider());
 
@@ -46,7 +44,7 @@ public class CommonSetup {
             System.setProperty("prism.lcdtext", "false");
     }
 
-    private static void setupErrorHandler(BiConsumer<Throwable, Boolean> errorHandler) {
+    private static void setupErrorHandler(UncaughtExceptionHandler uncaughtExceptionHandler) {
         Thread.UncaughtExceptionHandler handler = (thread, throwable) -> {
             // Might come from another thread
             if (throwable.getCause() != null && throwable.getCause().getCause() != null &&
@@ -61,7 +59,7 @@ public class CommonSetup {
                 log.error("throwableClass= " + throwable.getClass());
                 log.error("Stack trace:\n" + ExceptionUtils.getStackTrace(throwable));
                 throwable.printStackTrace();
-                UserThread.execute(() -> errorHandler.accept(throwable, false));
+                UserThread.execute(() -> uncaughtExceptionHandler.handleUncaughtException(throwable, false));
             }
         };
         Thread.setDefaultUncaughtExceptionHandler(handler);
@@ -71,7 +69,7 @@ public class CommonSetup {
             Utilities.checkCryptoPolicySetup();
         } catch (NoSuchAlgorithmException | LimitedKeyStrengthException e) {
             e.printStackTrace();
-            UserThread.execute(() -> errorHandler.accept(e, true));
+            UserThread.execute(() -> uncaughtExceptionHandler.handleUncaughtException(e, true));
         }
     }
 }
