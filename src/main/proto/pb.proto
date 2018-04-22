@@ -1394,11 +1394,12 @@ message Ballot {
 }
 
 message MyVote {
-    BallotList ballot_list = 1;
-    bytes secret_key_encoded = 2;
-    BlindVote blind_vote = 3;
-    int64 date = 4;
-    string reveal_tx_id = 5;
+    int32 height = 1;
+    BallotList ballot_list = 2;
+    bytes secret_key_encoded = 3;
+    BlindVote blind_vote = 4;
+    int64 date = 5;
+    string reveal_tx_id = 6;
 }
 
 message ParamChange {
