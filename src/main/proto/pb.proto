@@ -50,9 +50,9 @@ message NetworkEnvelope {
 
         PrivateNotificationMessage private_notification_message = 27;
 
-        GetTxBlocksRequest get_tx_blocks_request = 28;
-        GetTxBlocksResponse get_tx_blocks_response = 29;
-        NewTxBlockBroadcastMessage new_tx_block_broadcast_message = 30;
+        GetBlocksRequest get_blocks_request = 28;
+        GetBlocksResponse get_blocks_response = 29;
+        NewBlockBroadcastMessage new_block_broadcast_message = 30;
 
         AddPersistableNetworkPayloadMessage add_persistable_network_payload_message = 31;
     }
@@ -286,18 +286,18 @@ message PrivateNotificationMessage {
 
 // DAO
 
-message GetTxBlocksRequest {
+message GetBlocksRequest {
     int32 from_block_height = 1;
     int32 nonce = 2;
 }
 
-message GetTxBlocksResponse {
-    repeated TxBlock tx_blocks = 1;
+message GetBlocksResponse {
+    repeated Block blocks = 1;
     int32 request_nonce = 2;
 }
 
-message NewTxBlockBroadcastMessage {
-    TxBlock tx_block = 1;
+message NewBlockBroadcastMessage {
+    Block block = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1221,7 +1221,7 @@ message UserPayload {
 
 // blockchain
 
-message TxBlock {
+message Block {
     int32 height = 1;
     int64 time = 2;
     string hash = 3;
@@ -1329,10 +1329,6 @@ message Cycle {
     int32 height_of_first_lock = 2;
 }
 
-message Block {
-    TxBlock tx_block = 1;
-    // TODO not sure yet if we store other data in block, if not we can omit Block and use TxBlock directly
-}
 message State {
     string genesis_tx_id = 1;
     int32 genesis_block_height = 2;
