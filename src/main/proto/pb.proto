@@ -398,7 +398,6 @@ message PaymentAccountFilter {
     string value = 3;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Storage payload
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -946,7 +945,6 @@ message PaymentAccountList {
     repeated PaymentAccount payment_account = 1;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Offer/Trade
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1217,7 +1215,6 @@ message UserPayload {
     Mediator registered_mediator = 11;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 // DAO
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1319,7 +1316,18 @@ message PubKeyScript {
     string hex = 5;
 }
 
-// other dao data
+// dao data
+
+
+message PhaseWrapper {
+    string phase_name = 1;
+    int32 duration = 2;
+}
+
+message Cycle {
+    repeated PhaseWrapper phase_wrapper_list = 1;
+    int32 height_of_first_lock = 2;
+}
 
 message Block {
     TxBlock tx_block = 1;
@@ -1328,13 +1336,15 @@ message Block {
 message State {
     string genesis_tx_id = 1;
     int32 genesis_block_height = 2;
-    repeated Block blocks = 3;
-    map<string, TxType> tx_type_map = 4;
-    map<string, int64> burnt_fee_map = 5;
-    map<string, int32> issuance_block_height_map = 6;
-    map<string, TxOutput> unspent_tx_output_map = 7;
-    map<string, TxOutputType> tx_output_type_map = 8;
-    map<string, SpentInfo> spent_info_map = 9;
+    int32 chain_height = 3;
+    repeated Block blocks = 4;
+    map<string, TxType> tx_type_map = 5;
+    map<string, int64> burnt_fee_map = 6;
+    map<string, int32> issuance_block_height_map = 7;
+    map<string, TxOutput> unspent_tx_output_map = 8;
+    map<string, TxOutputType> tx_output_type_map = 9;
+    map<string, SpentInfo> spent_info_map = 10;
+    repeated Cycle cycles = 11;
 }
 
 message Proposal {
