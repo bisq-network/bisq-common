@@ -50,9 +50,9 @@ message NetworkEnvelope {
 
         PrivateNotificationMessage private_notification_message = 27;
 
-        GetBsqBlocksRequest get_bsq_blocks_request = 28;
-        GetBsqBlocksResponse get_bsq_blocks_response = 29;
-        NewBsqBlockBroadcastMessage new_bsq_block_broadcast_message = 30;
+        GetTxBlocksRequest get_tx_blocks_request = 28;
+        GetTxBlocksResponse get_tx_blocks_response = 29;
+        NewTxBlockBroadcastMessage new_tx_block_broadcast_message = 30;
 
         AddPersistableNetworkPayloadMessage add_persistable_network_payload_message = 31;
     }
@@ -286,18 +286,18 @@ message PrivateNotificationMessage {
 
 // DAO
 
-message GetBsqBlocksRequest {
+message GetTxBlocksRequest {
     int32 from_block_height = 1;
     int32 nonce = 2;
 }
 
-message GetBsqBlocksResponse {
-    repeated BsqBlock bsq_blocks = 1;
+message GetTxBlocksResponse {
+    repeated TxBlock tx_blocks = 1;
     int32 request_nonce = 2;
 }
 
-message NewBsqBlockBroadcastMessage {
-    BsqBlock bsq_block = 1;
+message NewTxBlockBroadcastMessage {
+    TxBlock tx_block = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -396,103 +396,6 @@ message PaymentAccountFilter {
     string payment_method_id = 1;
     string get_method_name = 2;
     string value = 3;
-}
-
-// DAO
-
-enum ScriptType {
-    PB_ERROR_SCRIPT_TYPES = 0;
-    PUB_KEY = 1;
-    PUB_KEY_HASH = 2;
-    SCRIPT_HASH = 3;
-    MULTISIG = 4;
-    NULL_DATA = 5;
-    WITNESS_V0_KEYHASH = 6;
-    WITNESS_V0_SCRIPTHASH = 7;
-    NONSTANDARD = 8;
-}
-
-message PubKeyScript {
-    int32 req_sigs = 1;
-    ScriptType script_type = 2;
-    repeated string addresses = 3;
-    string asm = 4;
-    string hex = 5;
-}
-
-message TxInput {
-    string connected_tx_output_tx_id = 1;
-    int32 connected_tx_output_index = 2;
-}
-
-message SpentInfo {
-    int64 block_height = 1;
-    string tx_id = 2;
-    int32 input_index = 3;
-}
-
-enum TxOutputType {
-    PB_ERROR_TX_OUTPUT_TYPE = 0;
-    UNDEFINED = 1;
-    GENESIS_OUTPUT = 2;
-    BSQ_OUTPUT = 3;
-    BTC_OUTPUT = 4;
-    PROPOSAL_OP_RETURN_OUTPUT = 5;
-    COMP_REQ_OP_RETURN_OUTPUT = 6;
-    ISSUANCE_CANDIDATE_OUTPUT = 7;
-    BLIND_VOTE_LOCK_STAKE_OUTPUT = 8;
-    BLIND_VOTE_OP_RETURN_OUTPUT = 9;
-    VOTE_REVEAL_UNLOCK_STAKE_OUTPUT = 10;
-    VOTE_REVEAL_OP_RETURN_OUTPUT = 11;
-    BOND_LOCK = 12;
-    BOND_LOCK_OP_RETURN_OUTPUT = 13;
-    BOND_UNLOCK = 14;
-    BOND_UNLOCK_OP_RETURN_OUTPUT = 15;
-    INVALID_OUTPUT = 16;
-}
-
-message TxOutput {
-    int32 index = 1;
-    int64 value = 2;
-    string tx_id = 3;
-    PubKeyScript pub_key_script = 4;
-    string address = 5;
-    bytes op_return_data = 6;
-    int32 block_height = 7;
-}
-
-enum TxType {
-    PB_ERROR_TX_TYPE = 0;
-    UNDEFINED_TX_TYPE = 1;
-    UNVERIFIED = 2;
-    INVALID = 3;
-    GENESIS = 4;
-    TRANSFER_BSQ = 5;
-    PAY_TRADE_FEE = 6;
-    PROPOSAL = 7;
-    COMPENSATION_REQUEST = 8;
-    BLIND_VOTE = 9;
-    VOTE_REVEAL = 10;
-    LOCK_UP = 11;
-    UN_LOCK = 12;
-}
-
-message Tx {
-    string tx_version = 1;
-    string id = 2;
-    int32 block_height = 3;
-    string block_hash = 4;
-    int64 time = 5;
-    repeated TxInput inputs = 6;
-    repeated TxOutput outputs = 7;
-}
-
-message BsqBlock {
-    int32 height = 1;
-    int64 time = 2;
-    string hash = 3;
-    string previous_block_hash = 4;
-    repeated Tx txs = 5;
 }
 
 
@@ -970,7 +873,7 @@ message PersistableEnvelope {
         UserPayload user_payload = 10;
         PaymentAccountList payment_account_list = 11;
 
-        BsqBlockChain bsq_block_chain = 12;
+        State state = 12;
 
         PersistableNetworkPayloadList persistable_network_payload_list = 13;
         BallotList ballot_list = 14;
@@ -1314,18 +1217,124 @@ message UserPayload {
     Mediator registered_mediator = 11;
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 // DAO
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-message BsqBlockChain {
-    repeated BsqBlock bsq_blocks = 1;
-    map<string, Tx> tx_map = 2;
-    map<string, TxOutput> unspent_tx_outputs_map = 3;
-    string genesis_tx_id = 4;
-    int32 genesis_block_height = 5;
-    int32 chain_head_height = 6;
-    Tx genesis_tx = 7;
+// blockchain
+
+message TxBlock {
+    int32 height = 1;
+    int64 time = 2;
+    string hash = 3;
+    string previous_block_hash = 4;
+    repeated Tx txs = 5;
+}
+
+message Tx {
+    string tx_version = 1;
+    string id = 2;
+    int32 block_height = 3;
+    string block_hash = 4;
+    int64 time = 5;
+    repeated TxInput inputs = 6;
+    repeated TxOutput outputs = 7;
+}
+
+enum TxType {
+    PB_ERROR_TX_TYPE = 0;
+    UNDEFINED_TX_TYPE = 1;
+    UNVERIFIED = 2;
+    INVALID = 3;
+    GENESIS = 4;
+    TRANSFER_BSQ = 5;
+    PAY_TRADE_FEE = 6;
+    PROPOSAL = 7;
+    COMPENSATION_REQUEST = 8;
+    BLIND_VOTE = 9;
+    VOTE_REVEAL = 10;
+    LOCK_UP = 11;
+    UN_LOCK = 12;
+}
+
+message TxInput {
+    string connected_tx_output_tx_id = 1;
+    int32 connected_tx_output_index = 2;
+}
+
+message TxOutput {
+    int32 index = 1;
+    int64 value = 2;
+    string tx_id = 3;
+    PubKeyScript pub_key_script = 4;
+    string address = 5;
+    bytes op_return_data = 6;
+    int32 block_height = 7;
+}
+
+enum TxOutputType {
+    PB_ERROR_TX_OUTPUT_TYPE = 0;
+    UNDEFINED = 1;
+    GENESIS_OUTPUT = 2;
+    BSQ_OUTPUT = 3;
+    BTC_OUTPUT = 4;
+    PROPOSAL_OP_RETURN_OUTPUT = 5;
+    COMP_REQ_OP_RETURN_OUTPUT = 6;
+    ISSUANCE_CANDIDATE_OUTPUT = 7;
+    BLIND_VOTE_LOCK_STAKE_OUTPUT = 8;
+    BLIND_VOTE_OP_RETURN_OUTPUT = 9;
+    VOTE_REVEAL_UNLOCK_STAKE_OUTPUT = 10;
+    VOTE_REVEAL_OP_RETURN_OUTPUT = 11;
+    BOND_LOCK = 12;
+    BOND_LOCK_OP_RETURN_OUTPUT = 13;
+    BOND_UNLOCK = 14;
+    BOND_UNLOCK_OP_RETURN_OUTPUT = 15;
+    INVALID_OUTPUT = 16;
+}
+
+message SpentInfo {
+    int64 block_height = 1;
+    string tx_id = 2;
+    int32 input_index = 3;
+}
+
+enum ScriptType {
+    PB_ERROR_SCRIPT_TYPES = 0;
+    PUB_KEY = 1;
+    PUB_KEY_HASH = 2;
+    SCRIPT_HASH = 3;
+    MULTISIG = 4;
+    NULL_DATA = 5;
+    WITNESS_V0_KEYHASH = 6;
+    WITNESS_V0_SCRIPTHASH = 7;
+    NONSTANDARD = 8;
+}
+
+message PubKeyScript {
+    int32 req_sigs = 1;
+    ScriptType script_type = 2;
+    repeated string addresses = 3;
+    string asm = 4;
+    string hex = 5;
+}
+
+// other dao data
+
+message Block {
+    TxBlock tx_block = 1;
+    // TODO not sure yet if we store other data in block, if not we can omit Block and use TxBlock directly
+}
+message State {
+    string genesis_tx_id = 1;
+    int32 genesis_block_height = 2;
+    repeated Block blocks = 3;
+    map<string, TxType> tx_type_map = 4;
+    map<string, int64> burnt_fee_map = 5;
+    map<string, int32> issuance_block_height_map = 6;
+    map<string, TxOutput> unspent_tx_output_map = 7;
+    map<string, TxOutputType> tx_output_type_map = 8;
+    map<string, SpentInfo> spent_info_map = 9;
 }
 
 message Proposal {
