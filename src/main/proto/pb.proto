@@ -1043,22 +1043,6 @@ message PaymentAccountList {
     repeated PaymentAccount payment_account = 1;
 }
 
-message BallotList {
-    repeated Ballot ballot = 1;
-}
-
-message MyVoteList {
-    repeated MyVote my_vote = 1;
-}
-
-message BlindVoteList {
-    repeated BlindVote blind_vote = 1;
-}
-
-/*message ChangeParamEventList {
-    repeated ChangeParamEvent param_change_event = 1;
-}*/
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Offer/Trade
@@ -1345,13 +1329,13 @@ message BsqBlockChain {
 }
 
 message Proposal {
-    uint32 version = 1;
-    int64 creation_date = 2;
-    string uid = 3;
-    string name = 4;
-    string title = 5;
-    string description = 6;
-    string link = 7;
+    string uid = 1;
+    string name = 2;
+    string title = 3;
+    string description = 4;
+    string link = 5;
+    uint32 version = 6;
+    int64 creation_date = 7;
     string tx_id = 8;
     oneof message {
         CompensationProposal compensation_proposal = 9;
@@ -1378,8 +1362,8 @@ message RemoveAltcoinProposal {
 
 message ProposalPayload {
     Proposal proposal = 1;
-    bytes owner_pub_key_encoded = 8;
-    map<string, string> extra_data = 10;
+    bytes owner_pub_key_encoded = 2;
+    map<string, string> extra_data = 3;
 }
 
 message Ballot {
@@ -1393,13 +1377,20 @@ message Ballot {
     }
 }
 
-message MyVote {
-    int32 height = 1;
-    BallotList ballot_list = 2;
-    bytes secret_key_encoded = 3;
-    BlindVote blind_vote = 4;
-    int64 date = 5;
-    string reveal_tx_id = 6;
+message CompensationBallot {
+}
+
+message GenericBallot {
+}
+
+message ChangeParamBallot {
+}
+
+message RemoveAltcoinBallot {
+}
+
+message BallotList {
+    repeated Ballot ballot = 1;
 }
 
 message ParamChange {
@@ -1411,6 +1402,23 @@ message ParamChange {
 message ParamChangeEvent {
     ParamChange param_change = 1;
     int32 height = 2;
+}
+
+message ParamChangeEventList {
+    repeated ParamChangeEvent param_change_event = 1;
+}
+
+message MyVote {
+    int32 height = 1;
+    BallotList ballot_list = 2;
+    bytes secret_key_encoded = 3;
+    BlindVote blind_vote = 4;
+    int64 date = 5;
+    string reveal_tx_id = 6;
+}
+
+message MyVoteList {
+    repeated MyVote my_vote = 1;
 }
 
 message BlindVote {
@@ -1425,16 +1433,8 @@ message BlindVotePayload {
     map<string, string> extra_data = 3;
 }
 
-message CompensationBallot {
-}
-
-message GenericBallot {
-}
-
-message ChangeParamBallot {
-}
-
-message RemoveAltcoinBallot {
+message BlindVoteList {
+    repeated BlindVote blind_vote = 1;
 }
 
 message Vote {
