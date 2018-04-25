@@ -71,7 +71,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadFactory;
@@ -111,12 +110,12 @@ public class Utilities {
         return MoreExecutors.listeningDecorator(getSingleThreadExecutor(name));
     }
 
-    public static ExecutorService getSingleThreadExecutor(String name) {
+    public static ListeningExecutorService getSingleThreadExecutor(String name) {
         final ThreadFactory threadFactory = new ThreadFactoryBuilder()
                 .setNameFormat(name)
                 .setDaemon(true)
                 .build();
-        return Executors.newSingleThreadExecutor(threadFactory);
+        return MoreExecutors.listeningDecorator(Executors.newSingleThreadExecutor(threadFactory));
     }
 
     public static ListeningExecutorService getListeningExecutorService(String name,
