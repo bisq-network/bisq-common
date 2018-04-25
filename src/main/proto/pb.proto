@@ -1425,8 +1425,17 @@ message MyVoteList {
     repeated MyVote my_vote = 1;
 }
 
+message VoteWithProposalTxId {
+    string proposal_tx_id = 1;
+    Vote vote = 2;
+}
+
+message VoteWithProposalTxIdList {
+    repeated VoteWithProposalTxId item = 1;
+}
+
 message BlindVote {
-    bytes encrypted_ballot_list = 1;
+    bytes encrypted_votes = 1;
     string tx_id = 2;
     int64 stake = 3;
 }
