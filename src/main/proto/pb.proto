@@ -993,6 +993,8 @@ message PersistableEnvelope {
         MyVoteList my_vote_list = 18;
         BlindVoteList blind_vote_list = 19;
         ParamChangeEventList param_change_event_list = 20;
+        AccountAgeWitnessMap account_age_witness_map = 21;
+        TradeStatistics2Map trade_statistics2_map = 22;
     }
 }
 
@@ -1024,6 +1026,14 @@ message PersistedEntryMap {
 
 message PersistableNetworkPayloadList {
     repeated PersistableNetworkPayload items = 1;
+}
+
+message AccountAgeWitnessMap {
+    map<string, AccountAgeWitness> items = 1;
+}
+
+message TradeStatistics2Map {
+    map<string, TradeStatistics2> items = 1;
 }
 
 message PeerList {
@@ -1275,9 +1285,6 @@ message TradingPeer {
     int64 current_date = 14;
 }
 
-message AccountAgeWitnessMap {
-    map<string, AccountAgeWitness> account_age_witness_map = 1;
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Dispute
