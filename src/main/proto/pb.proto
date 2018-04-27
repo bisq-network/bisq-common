@@ -987,14 +987,14 @@ message PersistableEnvelope {
         VoteItemsList vote_items_list = 13; // deprecated. Not used anymore.
         BsqBlockChain bsq_block_chain = 14;
 
-        PersistableNetworkPayloadList persistable_network_payload_list = 15;
+        PersistableNetworkPayloadList persistable_network_payload_list = 15; // deprecated. Not used anymore.
         CompensationRequestList compensation_request_list = 16; // deprecated. Not used anymore.
         ProposalList proposal_list = 17;
         MyVoteList my_vote_list = 18;
         BlindVoteList blind_vote_list = 19;
         ParamChangeEventList param_change_event_list = 20;
-        AccountAgeWitnessMap account_age_witness_map = 21;
-        TradeStatistics2Map trade_statistics2_map = 22;
+        AccountAgeWitnessStore account_age_witness_store = 21;
+        TradeStatistics2Store trade_statistics2_store = 22;
     }
 }
 
@@ -1024,16 +1024,19 @@ message PersistedEntryMap {
     map<string, ProtectedStorageEntry> persisted_entry_map = 1;
 }
 
+// deprecated. Not used anymore.
 message PersistableNetworkPayloadList {
     repeated PersistableNetworkPayload items = 1;
 }
 
-message AccountAgeWitnessMap {
-    map<string, AccountAgeWitness> items = 1;
+// We use a list not a hash map to save disc space. The hash can be calculated from the payload anyway
+message AccountAgeWitnessStore {
+    repeated AccountAgeWitness items = 1;
 }
 
-message TradeStatistics2Map {
-    map<string, TradeStatistics2> items = 1;
+// We use a list not a hash map to save disc space. The hash can be calculated from the payload anyway
+message TradeStatistics2Store {
+    repeated TradeStatistics2 items = 1;
 }
 
 message PeerList {
