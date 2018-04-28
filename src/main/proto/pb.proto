@@ -344,8 +344,8 @@ message StoragePayload {
 
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
-        ProposalProtectedStoragePayload proposal_protected_storage_payload = 8;
-        BlindVoteProtectedStoragePayload blind_vote_protected_storage_payload = 9;
+        ProposalPayload proposal_payload = 8;
+        BlindVotePayload blind_vote_payload = 9;
     }
 }
 
@@ -880,10 +880,12 @@ message PersistableEnvelope {
         State state = 15;
 
         ProposalAppendOnlyStore proposal_append_only_store = 16;
-        BlindVoteAppendOnlyStore blind_vote_append_only_store = 17;
-        BallotList ballot_list = 18;
-        MyVoteList my_vote_list = 19;
-        BlindVoteList blind_vote_list = 20;
+        ProposalStore proposal_store = 17;
+        BlindVoteAppendOnlyStore blind_vote_append_only_store = 18;
+        BlindVoteStore blind_vote_store = 19;
+        BallotList ballot_list = 20;
+        MyVoteList my_vote_list = 21;
+        BlindVoteList blind_vote_list = 22;
 
     }
 }
@@ -1392,7 +1394,7 @@ message RemoveAltcoinProposal {
     string currency_code = 1;
 }
 
-message ProposalProtectedStoragePayload {
+message ProposalPayload {
     Proposal proposal = 1;
     bytes owner_pub_key_encoded = 2;
     map<string, string> extra_data = 3;
@@ -1405,6 +1407,10 @@ message ProposalAppendOnlyPayload {
 
 message ProposalAppendOnlyStore {
     repeated ProposalAppendOnlyPayload items = 1;
+}
+
+message ProposalStore {
+    repeated ProtectedStorageEntry items = 1;
 }
 
 message Ballot {
@@ -1466,7 +1472,7 @@ message BlindVote {
     int64 stake = 3;
 }
 
-message BlindVoteProtectedStoragePayload {
+message BlindVotePayload {
     BlindVote blind_vote = 1;
     bytes owner_pub_key_as_encoded = 2;
     map<string, string> extra_data = 3;
@@ -1478,6 +1484,10 @@ message BlindVoteList {
 
 message BlindVoteAppendOnlyStore {
     repeated BlindVoteAppendOnlyPayload items = 1;
+}
+
+message BlindVoteStore {
+    repeated ProtectedStorageEntry items = 1;
 }
 
 message BlindVoteAppendOnlyPayload {
