@@ -344,8 +344,8 @@ message StoragePayload {
 
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
-        ProposalPayload proposal_payload = 8;
-        BlindVotePayload blind_vote_payload = 9;
+        ProposalProtectedStoragePayload proposal_protected_storage_payload = 8;
+        BlindVoteProtectedStoragePayload blind_vote_protected_storage_payload = 9;
     }
 }
 
@@ -353,6 +353,8 @@ message PersistableNetworkPayload {
     oneof message {
         AccountAgeWitness account_age_witness = 1;
         TradeStatistics2 trade_statistics2 = 2;
+        ProposalPayload proposal_payload = 3;
+        BlindVotePayload blind_vote_payload = 4;
     }
 }
 
@@ -877,9 +879,12 @@ message PersistableEnvelope {
 
         State state = 15;
 
-        BallotList ballot_list = 16;
-        MyVoteList my_vote_list = 17;
-        BlindVoteList blind_vote_list = 18;
+        ProposalStore proposal_store = 16;
+        BlindVoteStore blind_vote_store = 17;
+        BallotList ballot_list = 18;
+        MyVoteList my_vote_list = 19;
+        BlindVoteList blind_vote_list = 20;
+
     }
 }
 
@@ -1386,10 +1391,19 @@ message RemoveAltcoinProposal {
     string currency_code = 1;
 }
 
-message ProposalPayload {
+message ProposalProtectedStoragePayload {
     Proposal proposal = 1;
     bytes owner_pub_key_encoded = 2;
     map<string, string> extra_data = 3;
+}
+
+message ProposalPayload {
+    Proposal proposal = 1;
+    bytes hash = 2;
+}
+
+message ProposalStore {
+    repeated ProposalPayload items = 1;
 }
 
 message Ballot {
@@ -1451,7 +1465,7 @@ message BlindVote {
     int64 stake = 3;
 }
 
-message BlindVotePayload {
+message BlindVoteProtectedStoragePayload {
     BlindVote blind_vote = 1;
     bytes owner_pub_key_as_encoded = 2;
     map<string, string> extra_data = 3;
@@ -1459,6 +1473,15 @@ message BlindVotePayload {
 
 message BlindVoteList {
     repeated BlindVote blind_vote = 1;
+}
+
+message BlindVoteStore {
+    repeated BlindVotePayload items = 1;
+}
+
+message BlindVotePayload {
+    BlindVote blind_vote = 1;
+    bytes hash = 2;
 }
 
 message Vote {
