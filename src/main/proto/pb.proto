@@ -883,9 +883,10 @@ message PersistableEnvelope {
         ProposalStore proposal_store = 17;
         BlindVoteAppendOnlyStore blind_vote_append_only_store = 18;
         BlindVoteStore blind_vote_store = 19;
-        BallotList ballot_list = 20;
-        MyVoteList my_vote_list = 21;
-        BlindVoteList blind_vote_list = 22;
+        ProposalList proposal_list = 20;
+        BallotList ballot_list = 21;
+        MyVoteList my_vote_list = 22;
+        BlindVoteList blind_vote_list = 23;
 
     }
 }
@@ -1434,6 +1435,10 @@ message ChangeParamBallot {
 }
 
 message RemoveAltcoinBallot {
+}
+
+message ProposalList {
+    repeated Proposal proposal = 1;
 }
 
 message BallotList {
