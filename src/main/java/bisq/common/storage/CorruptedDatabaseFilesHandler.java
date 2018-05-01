@@ -22,7 +22,7 @@ import java.util.List;
 
 import lombok.Getter;
 
-public class CorruptedDataBaseFilesHandler {
+public class CorruptedDatabaseFilesHandler {
     @Getter
     private List<String> corruptedDatabaseFiles = new ArrayList<>();
 
