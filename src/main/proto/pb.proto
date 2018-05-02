@@ -883,10 +883,10 @@ message PersistableEnvelope {
         ProposalStore proposal_store = 17;
         BlindVoteAppendOnlyStore blind_vote_append_only_store = 18;
         BlindVoteStore blind_vote_store = 19;
-        ProposalList proposal_list = 20;
+        MyProposalList my_proposal_list = 20;
         BallotList ballot_list = 21;
         MyVoteList my_vote_list = 22;
-        BlindVoteList blind_vote_list = 23;
+        MyBlindVoteList my_blind_vote_list = 23;
 
     }
 }
@@ -1419,7 +1419,7 @@ message Ballot {
     Vote vote = 2;
 }
 
-message ProposalList {
+message MyProposalList {
     repeated Proposal proposal = 1;
 }
 
@@ -1465,7 +1465,7 @@ message BlindVotePayload {
     map<string, string> extra_data = 3;
 }
 
-message BlindVoteList {
+message MyBlindVoteList {
     repeated BlindVote blind_vote = 1;
 }
 
