@@ -1403,7 +1403,9 @@ message ProposalPayload {
 
 message ProposalAppendOnlyPayload {
     Proposal proposal = 1;
-    bytes hash = 2;
+    int64 date = 2;
+    bytes block_hash = 3;
+    bytes hash = 4;
 }
 
 message ProposalAppendOnlyStore {
@@ -1479,7 +1481,9 @@ message BlindVoteStore {
 
 message BlindVoteAppendOnlyPayload {
     BlindVote blind_vote = 1;
-    bytes hash = 2;
+    int64 date = 2;
+    bytes block_hash = 3;
+    bytes hash = 4;
 }
 
 message Vote {
