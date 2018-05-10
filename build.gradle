@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'network.bisq'
-version = '-SNAPSHOT'
+version = '0.7.0'
 
 ext {
     protobufVersion = '3.5.1'
