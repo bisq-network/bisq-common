@@ -17,12 +17,6 @@
 
 package bisq.common.app;
 
-import bisq.common.util.Profiler;
-
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-
 import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
@@ -114,12 +108,5 @@ public class Log {
             String className = stackTraceElement.getClassName();
             LoggerFactory.getLogger(className).trace("Called: {} [{}]", methodName, message);
         }
-    }
-
-    public static void logIfStressTests(String msg) {
-        if (DevEnv.STRESS_TEST_MODE)
-            System.err.println(new SimpleDateFormat("HH:mm:ss.SSS").format(new Date()) +
-                    " - " + msg +
-                    " / Memory(MB): " + Profiler.getUsedMemoryInMB());
     }
 }
