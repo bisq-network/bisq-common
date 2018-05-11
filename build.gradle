@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'network.bisq'
-version = '0.7.0'
+version = '-SNAPSHOT'
 
 ext {
     protobufVersion = '3.5.1'
@@ -18,7 +18,6 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
-    mavenLocal()
     jcenter()
     maven { url 'https://jitpack.io' }
 }
