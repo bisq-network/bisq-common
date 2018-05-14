@@ -51,14 +51,10 @@ public class Storage<T extends PersistableEnvelope> {
     private static final Logger log = LoggerFactory.getLogger(Storage.class);
     public static final String STORAGE_DIR = "storageDir";
 
-    private static DataBaseCorruptionHandler databaseCorruptionHandler;
+    private static CorruptedDatabaseFilesHandler corruptedDatabaseFilesHandler;
 
-    public static void setDatabaseCorruptionHandler(DataBaseCorruptionHandler databaseCorruptionHandler) {
-        Storage.databaseCorruptionHandler = databaseCorruptionHandler;
-    }
-
-    public interface DataBaseCorruptionHandler {
-        void onFileCorrupted(String fileName);
+    public static void setCorruptedDatabaseFilesHandler(CorruptedDatabaseFilesHandler corruptedDatabaseFilesHandler) {
+        Storage.corruptedDatabaseFilesHandler = corruptedDatabaseFilesHandler;
     }
 
     private final File dir;
@@ -174,8 +170,8 @@ public class Storage<T extends PersistableEnvelope> {
                     log.error(e1.getMessage());
                     // We swallow Exception if backup fails
                 }
-                if (databaseCorruptionHandler != null)
-                    databaseCorruptionHandler.onFileCorrupted(storageFile.getName());
+                if (corruptedDatabaseFilesHandler != null)
+                    corruptedDatabaseFilesHandler.onFileCorrupted(storageFile.getName());
             }
         }
         return null;

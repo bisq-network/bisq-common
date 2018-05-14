@@ -21,9 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class DevEnv {
-    // Was used for P2P network stress test to adjust several setting for the tests (e.g. use lower btc fees for offers,..)
-    public static final boolean STRESS_TEST_MODE = false;
-
     // The UI got set the private dev key so the developer does not need to do anything and can test those features.
     // Features: Arbitration registration (alt+R at account), Alert/Update (alt+m), private message to a
     // peer (click user icon and alt+r), filter/block offers by various data like offer ID (cmd + f).
