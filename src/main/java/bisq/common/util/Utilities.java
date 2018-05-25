@@ -50,6 +50,7 @@ import java.security.Permission;
 import java.security.PermissionCollection;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -471,6 +472,10 @@ public class Utilities {
         } else {
             return new HashSet<>();
         }
+    }
+
+    public static String getPathOfCodeSource() throws URISyntaxException {
+        return new File(Utilities.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
     }
 
     private static class AnnotationExclusionStrategy implements ExclusionStrategy {
