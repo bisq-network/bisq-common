@@ -17,16 +17,38 @@
 
 package bisq.common.storage;
 
+import javax.inject.Inject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CorruptedDatabaseFilesHandler {
-    @Getter
     private List<String> corruptedDatabaseFiles = new ArrayList<>();
+
+    @Inject
+    public CorruptedDatabaseFilesHandler() {
+    }
 
     public void onFileCorrupted(String fileName) {
         corruptedDatabaseFiles.add(fileName);
+    }
+
+    public Optional<List<String>> getCorruptedDatabaseFiles() {
+        if (!corruptedDatabaseFiles.isEmpty()) {
+            if (corruptedDatabaseFiles.size() == 1 && corruptedDatabaseFiles.get(0).equals("ViewPathAsString")) {
+                log.debug("We detected incompatible data base file for Navigation. " +
+                        "That is a minor issue happening with refactoring of UI classes " +
+                        "and we don't display a warning popup to the user.");
+                return Optional.empty();
+            } else {
+                return Optional.of(corruptedDatabaseFiles);
+            }
+        } else {
+            return Optional.empty();
+        }
     }
 }
