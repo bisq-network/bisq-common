@@ -344,7 +344,7 @@ message StoragePayload {
 
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
-        ProposalPayload proposal_payload = 8;
+        TempProposalPayload temp_proposal_payload = 8;
     }
 }
 
@@ -352,8 +352,8 @@ message PersistableNetworkPayload {
     oneof message {
         AccountAgeWitness account_age_witness = 1;
         TradeStatistics2 trade_statistics2 = 2;
-        ProposalAppendOnlyPayload proposal_append_only_payload = 3;
-        BlindVoteAppendOnlyPayload blind_vote_append_only_payload = 4;
+        ProposalPayload proposal_payload = 3;
+        BlindVotePayload blind_vote_payload = 4;
     }
 }
 
@@ -886,9 +886,9 @@ message PersistableEnvelope {
 
         State state = 15;
 
-        ProposalAppendOnlyStore proposal_append_only_store = 16;
-        ProposalStore proposal_store = 17;
-        BlindVoteAppendOnlyStore blind_vote_append_only_store = 18;
+        ProposalStore proposal_store = 16;
+        TempProposalStore temp_proposal_store = 17;
+        BlindVoteStore blind_vote_store = 18;
         MyProposalList my_proposal_list = 19;
         BallotList ballot_list = 20;
         MyVoteList my_vote_list = 21;
@@ -1401,24 +1401,24 @@ message RemoveAltcoinProposal {
     string currency_code = 1;
 }
 
-message ProposalPayload {
+message TempProposalPayload {
     Proposal proposal = 1;
     bytes owner_pub_key_encoded = 2;
     map<string, string> extra_data = 3;
 }
 
-message ProposalAppendOnlyPayload {
+message ProposalPayload {
     Proposal proposal = 1;
     int64 date = 2;
     bytes block_hash = 3;
     bytes hash = 4;
 }
 
-message ProposalAppendOnlyStore {
-    repeated ProposalAppendOnlyPayload items = 1;
+message ProposalStore {
+    repeated ProposalPayload items = 1;
 }
 
-message ProposalStore {
+message TempProposalStore {
     repeated ProtectedStorageEntry items = 1;
 }
 
@@ -1471,11 +1471,11 @@ message MyBlindVoteList {
     repeated BlindVote blind_vote = 1;
 }
 
-message BlindVoteAppendOnlyStore {
-    repeated BlindVoteAppendOnlyPayload items = 1;
+message BlindVoteStore {
+    repeated BlindVotePayload items = 1;
 }
 
-message BlindVoteAppendOnlyPayload {
+message BlindVotePayload {
     BlindVote blind_vote = 1;
     int64 date = 2;
     bytes hash = 3;
