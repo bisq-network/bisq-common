@@ -345,7 +345,6 @@ message StoragePayload {
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
         ProposalPayload proposal_payload = 8;
-        BlindVotePayload blind_vote_payload = 9;
     }
 }
 
@@ -890,11 +889,10 @@ message PersistableEnvelope {
         ProposalAppendOnlyStore proposal_append_only_store = 16;
         ProposalStore proposal_store = 17;
         BlindVoteAppendOnlyStore blind_vote_append_only_store = 18;
-        BlindVoteStore blind_vote_store = 19;
-        MyProposalList my_proposal_list = 20;
-        BallotList ballot_list = 21;
-        MyVoteList my_vote_list = 22;
-        MyBlindVoteList my_blind_vote_list = 23;
+        MyProposalList my_proposal_list = 19;
+        BallotList ballot_list = 20;
+        MyVoteList my_vote_list = 21;
+        MyBlindVoteList my_blind_vote_list = 22;
 
     }
 }
@@ -1469,12 +1467,6 @@ message BlindVote {
     int64 stake = 3;
 }
 
-message BlindVotePayload {
-    BlindVote blind_vote = 1;
-    bytes owner_pub_key_as_encoded = 2;
-    map<string, string> extra_data = 3;
-}
-
 message MyBlindVoteList {
     repeated BlindVote blind_vote = 1;
 }
@@ -1483,15 +1475,10 @@ message BlindVoteAppendOnlyStore {
     repeated BlindVoteAppendOnlyPayload items = 1;
 }
 
-message BlindVoteStore {
-    repeated ProtectedStorageEntry items = 1;
-}
-
 message BlindVoteAppendOnlyPayload {
     BlindVote blind_vote = 1;
     int64 date = 2;
-    bytes block_hash = 3;
-    bytes hash = 4;
+    bytes hash = 3;
 }
 
 message Vote {
