@@ -1168,7 +1168,6 @@ message TradingPeer {
     int64 current_date = 14;
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Dispute
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1283,6 +1282,7 @@ enum TxType {
 message TxInput {
     string connected_tx_output_tx_id = 1;
     int32 connected_tx_output_index = 2;
+    string pub_key = 3;
 }
 
 message TxOutput {
@@ -1341,7 +1341,6 @@ message PubKeyScript {
     string hex = 5;
 }
 
-
 // dao data
 
 message DaoPhase {
@@ -1361,12 +1360,20 @@ message State {
     repeated Block blocks = 4;
     map<string, TxType> tx_type_map = 5;
     map<string, int64> burnt_fee_map = 6;
-    map<string, int32> issuance_block_height_map = 7;
+    map<string, Issuance> issuance_map = 7;
     map<string, TxOutput> unspent_tx_output_map = 8;
     map<string, TxOutputType> tx_output_type_map = 9;
     map<string, SpentInfo> spent_info_map = 10;
     repeated Cycle cycles = 11;
     map<int32, ParamChangeMap> param_change_by_block_height = 12;
+}
+
+message Issuance {
+    TxOutput tx_output = 1;
+    int32 chainHeight = 2;
+    int64 amount = 3;
+    string inputPubKey = 4;
+    int64 date = 5;
 }
 
 message Proposal {
