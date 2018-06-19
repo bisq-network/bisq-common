@@ -893,7 +893,7 @@ message PersistableEnvelope {
         BallotList ballot_list = 20;
         MyVoteList my_vote_list = 21;
         MyBlindVoteList my_blind_vote_list = 22;
-
+        MeritList merit_list = 23;
     }
 }
 
@@ -1369,11 +1369,10 @@ message State {
 }
 
 message Issuance {
-    TxOutput tx_output = 1;
-    int32 chainHeight = 2;
+    string tx_id = 1;
+    int32 chain_height = 2;
     int64 amount = 3;
-    string inputPubKey = 4;
-    int64 date = 5;
+    string pub_key = 4;
 }
 
 message Proposal {
@@ -1472,6 +1471,7 @@ message BlindVote {
     bytes encrypted_votes = 1;
     string tx_id = 2;
     int64 stake = 3;
+    bytes encrypted_merit_list = 4;
 }
 
 message MyBlindVoteList {
@@ -1501,6 +1501,15 @@ message BooleanVote {
 
 message LongVote {
     uint64 value = 1;
+}
+
+message Merit {
+    Issuance issuance = 1;
+    bytes signature = 2;
+}
+
+message MeritList {
+    repeated Merit merit = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
