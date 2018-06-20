@@ -55,7 +55,7 @@ message NetworkEnvelope {
         NewBsqBlockBroadcastMessage new_bsq_block_broadcast_message = 30;
 
         AddPersistableNetworkPayloadMessage add_persistable_network_payload_message = 31;
-        ConfirmationMessage confirmation_message = 32;
+        AckMessage ack_message = 32;
     }
 }
 
@@ -155,7 +155,7 @@ message CloseConnectionMessage {
     string reason = 1;
 }
 
-message ConfirmationMessage {
+message AckMessage {
     string uid = 1;
     string source_type = 2; // enum name. e.g.  TradeMessage, DisputeMessage,...
     string source_uid = 3; // uid of source (TradeMessage)
