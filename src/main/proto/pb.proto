@@ -162,7 +162,7 @@ message AckMessage {
     string source_msg_class_name = 4;
     string source_uid = 5; // uid of source (TradeMessage)
     string source_id = 6; // id of source (tradeId, disputeId)
-    bool result = 7; // true if source message was processed successfully
+    bool success = 7; // true if source message was processed successfully
     string error_message = 8; // optional error message if source message processing failed
 }
 
@@ -1276,6 +1276,7 @@ message ProcessModel {
     int64 funds_needed_for_trade_as_long = 14;
     bytes my_multi_sig_pub_key = 15;
     NodeAddress temp_trading_peer_node_address = 16;
+    string payment_started_message_state = 17;
 }
 
 message TradingPeer {
