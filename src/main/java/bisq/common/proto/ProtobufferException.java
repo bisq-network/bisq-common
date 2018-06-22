@@ -15,17 +15,16 @@
  * along with Bisq. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package bisq.common.proto.network;
+package bisq.common.proto;
 
-import bisq.common.proto.ProtoResolver;
-import bisq.common.proto.ProtobufferException;
+import java.io.IOException;
 
-import io.bisq.generated.protobuffer.PB;
+public class ProtobufferException extends IOException {
+    public ProtobufferException(String message) {
+        super(message);
+    }
 
-public interface NetworkProtoResolver extends ProtoResolver {
-    NetworkEnvelope fromProto(PB.NetworkEnvelope proto) throws ProtobufferException;
-
-    NetworkPayload fromProto(PB.StoragePayload proto);
-
-    NetworkPayload fromProto(PB.StorageEntryWrapper proto);
+    public ProtobufferException(String message, Throwable e) {
+        super(message, e);
+    }
 }
