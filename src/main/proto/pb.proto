@@ -326,6 +326,7 @@ message NodeAddress {
 message Peer {
     NodeAddress node_address = 1;
     int64 date = 2;
+    repeated int32 supported_capabilities = 3;
 }
 
 message PubKeyRing {
