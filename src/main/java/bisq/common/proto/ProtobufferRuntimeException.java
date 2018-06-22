@@ -17,12 +17,12 @@
 
 package bisq.common.proto;
 
-public class ProtobufferException extends RuntimeException {
-    public ProtobufferException(String message) {
+public class ProtobufferRuntimeException extends RuntimeException {
+    public ProtobufferRuntimeException(String message) {
         super(message);
     }
 
-    public ProtobufferException(String message, Throwable e) {
+    public ProtobufferRuntimeException(String message, Throwable e) {
         super(message, e);
     }
 }
