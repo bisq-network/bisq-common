@@ -274,6 +274,8 @@ message DisputeCommunicationMessage {
     bool is_system_message = 9;
     NodeAddress sender_node_address = 10;
     string uid = 11;
+    bool acknowledged = 12;
+    string error_message = 13;
 }
 
 message DisputeResultMessage {
