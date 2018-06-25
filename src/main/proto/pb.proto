@@ -116,12 +116,14 @@ message OfferAvailabilityRequest {
     PubKeyRing pub_key_ring = 2;
     int64 takers_trade_price = 3;
     repeated int32 supported_capabilities = 4;
+    string uid = 5;
 }
 
 message OfferAvailabilityResponse {
     string offer_id = 1;
     AvailabilityResult availability_result = 2;
     repeated int32 supported_capabilities = 3;
+    string uid = 4;
 }
 
 message RefreshOfferMessage {
