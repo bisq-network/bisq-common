@@ -37,7 +37,8 @@ public class Capabilities {
         SEED_NODE,
         DAO_FULL_NODE,
         PROPOSAL,
-        BLIND_VOTE
+        BLIND_VOTE,
+        ACK_MSG
     }
 
     // Application need to set supported capabilities at startup
