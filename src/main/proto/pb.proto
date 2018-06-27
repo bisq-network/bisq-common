@@ -1357,6 +1357,7 @@ message PreferencesPayload {
     int32 tor_transport_ordinal = 36;
     string custom_bridges = 37;
     int32 bitcoin_nodes_option_ordinal = 38;
+    string referral_id = 39;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
