@@ -55,6 +55,7 @@ message NetworkEnvelope {
         NewBlockBroadcastMessage new_block_broadcast_message = 30;
 
         AddPersistableNetworkPayloadMessage add_persistable_network_payload_message = 31;
+        AckMessage ack_message = 32;
     }
 }
 
@@ -115,12 +116,14 @@ message OfferAvailabilityRequest {
     PubKeyRing pub_key_ring = 2;
     int64 takers_trade_price = 3;
     repeated int32 supported_capabilities = 4;
+    string uid = 5;
 }
 
 message OfferAvailabilityResponse {
     string offer_id = 1;
     AvailabilityResult availability_result = 2;
     repeated int32 supported_capabilities = 3;
+    string uid = 4;
 }
 
 message RefreshOfferMessage {
@@ -152,6 +155,17 @@ message AddPersistableNetworkPayloadMessage {
 
 message CloseConnectionMessage {
     string reason = 1;
+}
+
+message AckMessage {
+    string uid = 1;
+    NodeAddress sender_node_address = 2;
+    string source_type = 3; // enum name. e.g.  TradeMessage, DisputeMessage,...
+    string source_msg_class_name = 4;
+    string source_uid = 5; // uid of source (TradeMessage)
+    string source_id = 6; // id of source (tradeId, disputeId)
+    bool success = 7; // true if source message was processed successfully
+    string error_message = 8; // optional error message if source message processing failed
 }
 
 message PrefixedSealedAndSignedMessage {
@@ -262,6 +276,9 @@ message DisputeCommunicationMessage {
     bool is_system_message = 9;
     NodeAddress sender_node_address = 10;
     string uid = 11;
+    string send_message_error = 12;
+    bool acknowledged = 13;
+    string ack_error = 14;
 }
 
 message DisputeResultMessage {
@@ -314,6 +331,7 @@ message NodeAddress {
 message Peer {
     NodeAddress node_address = 1;
     int64 date = 2;
+    repeated int32 supported_capabilities = 3;
 }
 
 message PubKeyRing {
@@ -1149,6 +1167,7 @@ message ProcessModel {
     int64 funds_needed_for_trade_as_long = 14;
     bytes my_multi_sig_pub_key = 15;
     NodeAddress temp_trading_peer_node_address = 16;
+    string payment_started_message_state = 17;
 }
 
 message TradingPeer {
@@ -1219,6 +1238,7 @@ message PreferencesPayload {
     int32 tor_transport_ordinal = 36;
     string custom_bridges = 37;
     int32 bitcoin_nodes_option_ordinal = 38;
+    string referral_id = 39;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

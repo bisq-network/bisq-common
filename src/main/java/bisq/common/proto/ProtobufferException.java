@@ -17,7 +17,9 @@
 
 package bisq.common.proto;
 
-public class ProtobufferException extends RuntimeException {
+import java.io.IOException;
+
+public class ProtobufferException extends IOException {
     public ProtobufferException(String message) {
         super(message);
     }
