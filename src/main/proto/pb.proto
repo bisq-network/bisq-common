@@ -1364,8 +1364,10 @@ message State {
     map<string, TxOutput> unspent_tx_output_map = 8;
     map<string, TxOutputType> tx_output_type_map = 9;
     map<string, SpentInfo> spent_info_map = 10;
-    repeated Cycle cycles = 11;
-    map<int32, ParamChangeMap> param_change_by_block_height = 12;
+    map<string, int32> lock_time_map = 11;
+    map<string, int32> unlock_block_height_map = 12;
+    repeated Cycle cycles = 13;
+    map<int32, ParamChangeMap> param_change_by_block_height = 14;
 }
 
 message Issuance {
