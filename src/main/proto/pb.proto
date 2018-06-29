@@ -901,9 +901,7 @@ message PersistableEnvelope {
         PersistableNetworkPayloadList persistable_network_payload_list = 12; // deprecated. Not used anymore.
         AccountAgeWitnessStore account_age_witness_store = 13;
         TradeStatistics2Store trade_statistics2_store = 14;
-
         State state = 15;
-
         ProposalStore proposal_store = 16;
         TempProposalStore temp_proposal_store = 17;
         BlindVoteStore blind_vote_store = 18;

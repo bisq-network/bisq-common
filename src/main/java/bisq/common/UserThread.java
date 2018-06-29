@@ -58,11 +58,9 @@ public class UserThread {
         timerClass = FrameRateTimer.class;
     }
 
-
     public static void execute(Runnable command) {
         UserThread.executor.execute(command);
     }
-
 
     // Prefer FxTimer if a delay is needed in a JavaFx class (gui module)
     public static Timer runAfterRandomDelay(Runnable runnable, long minDelayInSec, long maxDelayInSec) {
