@@ -1281,6 +1281,15 @@ message Tx {
     repeated TxOutput outputs = 7;
 }
 
+message MutableTx {
+    Tx tx = 1;
+    TxType txType = 2;
+    map<int32, MutableTxOutput> mutable_tx_outputs = 3;
+    int64 burnt_fee = 4;
+    int32 lock_time = 5;
+    int32 unlock_block_height = 6;
+}
+
 enum TxType {
     PB_ERROR_TX_TYPE = 0;
     UNDEFINED_TX_TYPE = 1;
@@ -1311,6 +1320,12 @@ message TxOutput {
     string address = 5;
     bytes op_return_data = 6;
     int32 block_height = 7;
+}
+
+message MutableTxOutput {
+    TxOutput tx_output = 1;
+    TxOutputType tx_output_type = 2;
+    bool is_unspent = 3;
 }
 
 enum TxOutputType {
@@ -1376,16 +1391,11 @@ message State {
     int32 genesis_block_height = 2;
     int32 chain_height = 3;
     repeated Block blocks = 4;
-    map<string, TxType> tx_type_map = 5;
-    map<string, int64> burnt_fee_map = 6;
-    map<string, Issuance> issuance_map = 7;
-    map<string, TxOutput> unspent_tx_output_map = 8;
-    map<string, TxOutputType> tx_output_type_map = 9;
-    map<string, SpentInfo> spent_info_map = 10;
-    map<string, int32> lock_time_map = 11;
-    map<string, int32> unlock_block_height_map = 12;
-    repeated Cycle cycles = 13;
-    map<int32, ParamChangeMap> param_change_by_block_height = 14;
+    repeated Cycle cycles = 5;
+    map<string, MutableTx> mutable_tx_map = 6;
+    map<string, SpentInfo> spent_info_map = 7;
+    map<string, Issuance> issuance_map = 8;
+    map<int32, ParamChangeMap> param_change_by_block_height = 9;
 }
 
 message Issuance {
