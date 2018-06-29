@@ -18,6 +18,7 @@ tasks.withType(JavaCompile) {
 }
 
 repositories {
+    mavenLocal()
     jcenter()
     maven { url 'https://jitpack.io' }
 }
@@ -57,6 +58,6 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.4'
     compileOnly 'org.projectlombok:lombok:1.16.16'
-    annotationProcessor 'org.projectlombok:lombok:1.16.16'
+    // annotationProcessor 'org.projectlombok:lombok:1.16.16'
     testCompile 'junit:junit:4.12'
 }
