@@ -309,12 +309,12 @@ message GetBlocksRequest {
 }
 
 message GetBlocksResponse {
-    repeated Block blocks = 1;
+    repeated RawBlock raw_blocks = 1;
     int32 request_nonce = 2;
 }
 
 message NewBlockBroadcastMessage {
-    Block block = 1;
+    RawBlock raw_block = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1263,6 +1263,14 @@ message UserPayload {
 
 // blockchain
 
+message RawBlock {
+    int32 height = 1;
+    int64 time = 2;
+    string hash = 3;
+    string previous_block_hash = 4;
+    repeated RawTx raw_txs = 5;
+}
+
 message Block {
     int32 height = 1;
     int64 time = 2;
@@ -1271,20 +1279,20 @@ message Block {
     repeated Tx txs = 5;
 }
 
-message Tx {
+message RawTx {
     string tx_version = 1;
     string id = 2;
     int32 block_height = 3;
     string block_hash = 4;
     int64 time = 5;
-    repeated TxInput inputs = 6;
-    repeated TxOutput outputs = 7;
+    repeated TxInput tx_inputs = 6;
+    repeated RawTxOutput raw_tx_outputs = 7;
 }
 
-message MutableTx {
-    Tx tx = 1;
+message Tx {
+    RawTx tx = 1;
     TxType txType = 2;
-    map<int32, MutableTxOutput> mutable_tx_outputs = 3;
+    repeated TxOutput tx_outputs = 3;
     int64 burnt_fee = 4;
     int32 lock_time = 5;
     int32 unlock_block_height = 6;
@@ -1312,7 +1320,7 @@ message TxInput {
     string pub_key = 3;
 }
 
-message TxOutput {
+message RawTxOutput {
     int32 index = 1;
     int64 value = 2;
     string tx_id = 3;
@@ -1322,8 +1330,8 @@ message TxOutput {
     int32 block_height = 7;
 }
 
-message MutableTxOutput {
-    TxOutput tx_output = 1;
+message TxOutput {
+    RawTxOutput raw_tx_output = 1;
     TxOutputType tx_output_type = 2;
     bool is_unspent = 3;
 }
@@ -1392,7 +1400,7 @@ message State {
     int32 chain_height = 3;
     repeated Block blocks = 4;
     repeated Cycle cycles = 5;
-    map<string, MutableTx> mutable_tx_map = 6;
+    map<string, Tx> tx_map = 6; //TODO remove
     map<string, SpentInfo> spent_info_map = 7;
     map<string, Issuance> issuance_map = 8;
     map<int32, ParamChangeMap> param_change_by_block_height = 9;
