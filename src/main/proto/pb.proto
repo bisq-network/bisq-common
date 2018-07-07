@@ -1333,7 +1333,6 @@ message RawTxOutput {
 message TxOutput {
     RawTxOutput raw_tx_output = 1;
     TxOutputType tx_output_type = 2;
-    bool is_unspent = 3;
 }
 
 enum TxOutputType {
@@ -1400,7 +1399,7 @@ message State {
     int32 chain_height = 3;
     repeated Block blocks = 4;
     repeated Cycle cycles = 5;
-    map<string, Tx> tx_map = 6; //TODO remove
+    map<string, TxOutput> unspent_tx_output_map = 6;
     map<string, SpentInfo> spent_info_map = 7;
     map<string, Issuance> issuance_map = 8;
     map<int32, ParamChangeMap> param_change_by_block_height = 9;
