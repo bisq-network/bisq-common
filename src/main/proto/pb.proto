@@ -1452,9 +1452,7 @@ message TempProposalPayload {
 
 message ProposalPayload {
     Proposal proposal = 1;
-    int64 date = 2;
-    bytes block_hash = 3;
-    bytes hash = 4;
+    bytes hash = 2;
 }
 
 message ProposalStore {
