@@ -1477,7 +1477,7 @@ message BallotList {
 }
 
 message ParamChangeMap {
-    map<int32, int64> map = 1;
+    map<string, int64> map = 1; // key is enum name, value is paramValue as long
 }
 
 message MyVote {
