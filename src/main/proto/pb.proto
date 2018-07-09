@@ -1402,7 +1402,7 @@ message State {
     map<string, TxOutput> unspent_tx_output_map = 6;
     map<string, SpentInfo> spent_info_map = 7;
     map<string, Issuance> issuance_map = 8;
-    map<int32, ParamChangeMap> param_change_by_block_height = 9;
+    repeated ParamChange param_change_list = 9;
 }
 
 message Issuance {
@@ -1478,8 +1478,10 @@ message BallotList {
     repeated Ballot ballot = 1;
 }
 
-message ParamChangeMap {
-    map<string, int64> map = 1; // key is enum name, value is paramValue as long
+message ParamChange {
+    string param_name = 1;
+    int64 param_value = 2;
+    int32 activation_height = 3;
 }
 
 message MyVote {
