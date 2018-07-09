@@ -1438,6 +1438,8 @@ message GenericProposal {
 }
 
 message ChangeParamProposal {
+    string param = 1; // name of enum
+    int64 param_value = 2;
 }
 
 message RemoveAltcoinProposal {
