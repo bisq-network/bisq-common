@@ -1360,6 +1360,7 @@ message PreferencesPayload {
     string referral_id = 39;
     string phone_key_and_token = 40;
     bool use_sound_for_mobile_notifications = 41;
+    bool use_trade_notifications = 42;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
