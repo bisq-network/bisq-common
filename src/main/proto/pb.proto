@@ -1358,6 +1358,8 @@ message PreferencesPayload {
     string custom_bridges = 37;
     int32 bitcoin_nodes_option_ordinal = 38;
     string referral_id = 39;
+    string phone_key_and_token = 40;
+    bool use_sound_for_mobile_notifications = 41;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
