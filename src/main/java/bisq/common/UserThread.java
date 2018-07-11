@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Defines which thread is used as user thread. The user thread is the the main thread in the single threaded context.
- * For JavaFX it is usually the Platform::RunLater executor, for a headless application it it any single threaded
+ * For JavaFX it is usually the Platform::RunLater executor, for a headless application it is any single threaded
  * executor.
  * Additionally sets a timer class so JavaFX and headless applications can set different timers (UITimer for JavaFX
  * otherwise we use teh default FrameRateTimer).
