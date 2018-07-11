@@ -23,13 +23,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Delegate;
 
-public class PersistableList<T extends PersistablePayload> implements PersistableEnvelope {
-    @Delegate
+public class PersistableList<T extends PersistablePayload> implements PersistableEnvelope, Iterable<T> {
+    @Delegate(excludes = ExcludesDelegateMethods.class)
     @Getter
     @Setter
     private List<T> list;
@@ -58,8 +59,17 @@ public class PersistableList<T extends PersistablePayload> implements Persistabl
         this.toProto = toProto;
     }
 
+    // this.stream() does not compile for unknown reasons, so add that manual delegate method
+    public Stream<T> stream() {
+        return list.stream();
+    }
+
     @Override
     public Message toProtoMessage() {
         return toProto.apply(list);
+    }
+
+    private interface ExcludesDelegateMethods<T> {
+        Stream<T> stream();
     }
 }

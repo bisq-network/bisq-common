@@ -21,6 +21,8 @@ import org.bitcoinj.core.Utils;
 
 import com.google.common.base.Charsets;
 
+import org.spongycastle.crypto.digests.RIPEMD160Digest;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -65,11 +67,21 @@ public class Hash {
     }
 
     /**
-     * Calculates RIPEMD160(SHA256(input)).
+     * Calculates RIPEMD160(SHA256(data)).
      */
     public static byte[] getSha256Ripemd160hash(byte[] data) {
         return Utils.sha256hash160(data);
     }
 
+    /**
+     * Calculates RIPEMD160(data).
+     */
+    public static byte[] getRipemd160hash(byte[] data) {
+        RIPEMD160Digest digest = new RIPEMD160Digest();
+        digest.update(data, 0, data.length);
+        byte[] out = new byte[20];
+        digest.doFinal(out, 0);
+        return out;
+    }
 }
 
