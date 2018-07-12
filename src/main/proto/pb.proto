@@ -1406,9 +1406,11 @@ message State {
     repeated Block blocks = 4;
     repeated Cycle cycles = 5;
     map<string, TxOutput> unspent_tx_output_map = 6;
-    map<string, SpentInfo> spent_info_map = 7;
-    map<string, Issuance> issuance_map = 8;
-    repeated ParamChange param_change_list = 9;
+    map<string, TxOutput> non_bsq_tx_output_map = 7;
+    map<string, TxOutput> confiscated_tx_output_map = 8;
+    map<string, SpentInfo> spent_info_map = 9;
+    map<string, Issuance> issuance_map = 10;
+    repeated ParamChange param_change_list = 11;
 }
 
 message Issuance {
