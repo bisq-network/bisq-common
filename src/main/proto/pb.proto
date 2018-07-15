@@ -1377,6 +1377,8 @@ message PreferencesPayload {
     string phone_key_and_token = 40;
     bool use_sound_for_mobile_notifications = 41;
     bool use_trade_notifications = 42;
+    bool use_market_notifications = 43;
+    bool use_price_notifications = 44;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1395,6 +1397,7 @@ message UserPayload {
     repeated Mediator accepted_mediators = 9;
     Arbitrator registered_arbitrator = 10;
     Mediator registered_mediator = 11;
+    PriceAlertFilter price_alert_filter = 12;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1575,6 +1578,16 @@ message Country {
 message Region {
     string code = 1;
     string name = 2;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// Notifications
+///////////////////////////////////////////////////////////////////////////////////////////
+
+message PriceAlertFilter {
+    string currencyCode = 1;
+    int64 high = 2;
+    int64 low = 3;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
