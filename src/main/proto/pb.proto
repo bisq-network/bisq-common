@@ -1434,6 +1434,7 @@ message Proposal {
         GenericProposal generic_proposal = 10;
         ChangeParamProposal change_param_proposal = 11;
         RemoveAltcoinProposal remove_altcoin_proposal = 12;
+        BurnBondProposal burn_bond_proposal = 13;
     }
 }
 
@@ -1452,6 +1453,10 @@ message ChangeParamProposal {
 
 message RemoveAltcoinProposal {
     string currency_code = 1;
+}
+
+message BurnBondProposal {
+    string bond_id = 1;
 }
 
 message TempProposalPayload {
