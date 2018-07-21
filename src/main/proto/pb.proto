@@ -1456,7 +1456,7 @@ message RemoveAltcoinProposal {
 }
 
 message BurnBondProposal {
-    string bond_id = 1;
+    bytes bond_id = 1;
 }
 
 message TempProposalPayload {
@@ -1495,6 +1495,11 @@ message ParamChange {
     string param_name = 1;
     int64 param_value = 2;
     int32 activation_height = 3;
+}
+
+message BurnBond {
+    bytes bond_id = 1;
+    int32 activation_height = 2;
 }
 
 message MyVote {
