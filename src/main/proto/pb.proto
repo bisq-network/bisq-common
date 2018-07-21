@@ -1456,7 +1456,7 @@ message RemoveAltcoinProposal {
 }
 
 message ConfiscateBondProposal {
-    bytes bond_id = 1;
+    bytes hash_of_bond_id = 1;
 }
 
 message TempProposalPayload {
@@ -1498,8 +1498,8 @@ message ParamChange {
 }
 
 message ConfiscateBond {
-    bytes bond_id = 1;
-    int32 activation_height = 2;
+    bytes hash_of_bond_id = 1;
+    int32 activation_height = 2; //TODO needed?
 }
 
 message MyVote {
