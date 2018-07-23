@@ -17,6 +17,7 @@
 
 package bisq.common.storage;
 
+import bisq.common.app.DevEnv;
 import bisq.common.proto.persistable.PersistableEnvelope;
 import bisq.common.proto.persistable.PersistenceProtoResolver;
 
@@ -165,6 +166,8 @@ public class Storage<T extends PersistableEnvelope> {
                 try {
                     // We keep a backup which might be used for recovery
                     fileManager.removeAndBackupFile(fileName);
+                    if (DevEnv.isDevMode())
+                        throw new RuntimeException(t);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                     log.error(e1.getMessage());

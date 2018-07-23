@@ -916,6 +916,7 @@ message PersistableEnvelope {
         MyVoteList my_vote_list = 21;
         MyBlindVoteList my_blind_vote_list = 22;
         MeritList merit_list = 23;
+        BondedRoleList bonded_role_list = 24;
     }
 }
 
@@ -1435,6 +1436,7 @@ message Proposal {
         ChangeParamProposal change_param_proposal = 11;
         RemoveAltcoinProposal remove_altcoin_proposal = 12;
         ConfiscateBondProposal confiscate_bond_proposal = 13;
+        BondedRoleProposal bonded_role_proposal = 14;
     }
 }
 
@@ -1456,7 +1458,26 @@ message RemoveAltcoinProposal {
 }
 
 message ConfiscateBondProposal {
-    bytes hash_of_bond_id = 1;
+    bytes hash = 1;
+}
+
+message BondedRoleProposal {
+    BondedRole bonded_role = 1;
+}
+
+message BondedRole {
+    string uid = 1;
+    string name = 2;
+    string link_to_account = 3;
+    string bonded_role_type = 4; // name of BondedRoleType enum
+    uint64 start_date = 5;
+    string lockup_tx_id = 6;
+    uint64 revoke_date = 7;
+    string unlock_tx_id = 8;
+}
+
+message BondedRoleList {
+    repeated BondedRole bonded_role = 1;
 }
 
 message TempProposalPayload {
@@ -1498,7 +1519,7 @@ message ParamChange {
 }
 
 message ConfiscateBond {
-    bytes hash_of_bond_id = 1;
+    bytes hash = 1;
     int32 activation_height = 2; //TODO needed?
 }
 
