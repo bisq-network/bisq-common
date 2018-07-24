@@ -855,6 +855,7 @@ message CountryBasedPaymentAccountPayload {
         SepaAccountPayload sepa_account_payload = 4;
         WesternUnionAccountPayload western_union_account_payload = 5;
         SepaInstantAccountPayload sepa_instant_account_payload = 6;
+        F2FAccountPayload f2f_account_payload = 7;
     }
 }
 
@@ -986,6 +987,12 @@ message SwishAccountPayload {
 message USPostalMoneyOrderAccountPayload {
     string postal_address = 1;
     string holder_name = 2;
+}
+
+message F2FAccountPayload {
+    string contact = 1;
+    string city = 2;
+    string extra_info = 3;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
