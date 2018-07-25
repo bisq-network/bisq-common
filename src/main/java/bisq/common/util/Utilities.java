@@ -312,8 +312,7 @@ public class Utilities {
     }
 
     public static <T> T jsonToObject(String jsonString, Class<T> classOfT) {
-        Gson gson =
-                new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).setPrettyPrinting().create();
         return gson.fromJson(jsonString, classOfT);
     }
 
