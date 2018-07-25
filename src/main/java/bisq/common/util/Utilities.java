@@ -548,9 +548,8 @@ public class Utilities {
             return id.substring(0, Math.min(8, id.length()));
     }
 
-    @SuppressWarnings("unchecked")
-    public static String collectionToCSV(Collection collection) {
-        return collection.stream().map(Object::toString).collect(Collectors.joining(",")).toString();
+    public static String collectionToCSV(Collection<String> collection) {
+        return collection.stream().map(Object::toString).collect(Collectors.joining(","));
     }
 
     public static void removeCryptographyRestrictions() {

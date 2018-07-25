@@ -1474,7 +1474,7 @@ message MyVote {
 }
 
 message ParamChangeEvent {
-    // We use odingal instead of Enum as enaums in PB are a pain... as well we want to be more flexible at changes
+    // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
     int32 dao_param_ordinal = 1;
     int64 value = 2;
     int32 block_height = 3;
