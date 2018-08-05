@@ -26,6 +26,7 @@ import com.google.common.base.Enums;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -84,7 +85,7 @@ public class ProtoUtil {
                         return null;
                     }
                 })
-                .filter(e -> e != null)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
