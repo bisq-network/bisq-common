@@ -309,12 +309,14 @@ message GetBlocksRequest {
 }
 
 message GetBlocksResponse {
-    repeated RawBlock raw_blocks = 1;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseBlock raw_blocks = 1;
     int32 request_nonce = 2;
 }
 
 message NewBlockBroadcastMessage {
-    RawBlock raw_block = 1;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    BaseBlock raw_block = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1276,20 +1278,26 @@ message UserPayload {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // blockchain
-message RawBlock {
+
+message BaseBlock {
     int32 height = 1;
     int64 time = 2;
     string hash = 3;
     string previous_block_hash = 4;
-    repeated BaseTx raw_txs = 5;
+    oneof message {
+        RawBlock raw_block = 5;
+        Block block = 6;
+    }
+}
+
+message RawBlock {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTx raw_txs = 1;
 }
 
 message Block {
-    int32 height = 1;
-    int64 time = 2;
-    string hash = 3;
-    string previous_block_hash = 4;
-    repeated BaseTx txs = 5;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTx txs = 1;
 }
 
 message BaseTx {
@@ -1306,11 +1314,13 @@ message BaseTx {
 }
 
 message RawTx {
-    repeated RawTxOutput raw_tx_outputs = 1;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTxOutput raw_tx_outputs = 1;
 }
 
 message Tx {
-    repeated TxOutput tx_outputs = 1;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTxOutput tx_outputs = 1;
     TxType txType = 2;
     int64 burnt_fee = 3;
     int32 lock_time = 4;
@@ -1339,7 +1349,7 @@ message TxInput {
     string pub_key = 3;
 }
 
-message RawTxOutput {
+message BaseTxOutput {
     int32 index = 1;
     int64 value = 2;
     string tx_id = 3;
@@ -1347,11 +1357,17 @@ message RawTxOutput {
     string address = 5;
     bytes op_return_data = 6;
     int32 block_height = 7;
+    oneof message {
+        RawTxOutput raw_tx_output = 8;
+        TxOutput tx_output = 9;
+    }
+}
+
+message RawTxOutput {
 }
 
 message TxOutput {
-    RawTxOutput raw_tx_output = 1;
-    TxOutputType tx_output_type = 2;
+    TxOutputType tx_output_type = 1;
 }
 
 enum TxOutputType {
@@ -1416,12 +1432,14 @@ message BsqState {
     string genesis_tx_id = 1;
     int32 genesis_block_height = 2;
     int32 chain_height = 3;
-    repeated Block blocks = 4;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseBlock blocks = 4;
     repeated Cycle cycles = 5;
-    map<string, TxOutput> unspent_tx_output_map = 6;
-    map<string, TxOutput> non_bsq_tx_output_map = 7;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    map<string, BaseTxOutput> unspent_tx_output_map = 6;
+    map<string, BaseTxOutput> non_bsq_tx_output_map = 7;
     map<string, Issuance> issuance_map = 8;
-    map<string, TxOutput> confiscated_tx_output_map = 9;
+    map<string, BaseTxOutput> confiscated_tx_output_map = 9;
     map<string, SpentInfo> spent_info_map = 10;
     repeated ParamChange param_change_list = 11;
 }
