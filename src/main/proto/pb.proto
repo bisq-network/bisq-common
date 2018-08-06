@@ -908,7 +908,7 @@ message PersistableEnvelope {
         AccountAgeWitnessStore account_age_witness_store = 12;
         TradeStatistics2Store trade_statistics2_store = 13;
 
-        State state = 14;
+        BsqState bsq_state = 14;
 
         // we need to keep id 15 here otherwise the reading of the old data structure would not work anymore.
         // can be removed after most people have updated as the reading of the PersistableNetworkPayloadList
@@ -1407,7 +1407,7 @@ message Cycle {
     repeated DaoPhase dao_phase = 2;
 }
 
-message State {
+message BsqState {
     string genesis_tx_id = 1;
     int32 genesis_block_height = 2;
     int32 chain_height = 3;
@@ -1415,9 +1415,9 @@ message State {
     repeated Cycle cycles = 5;
     map<string, TxOutput> unspent_tx_output_map = 6;
     map<string, TxOutput> non_bsq_tx_output_map = 7;
-    map<string, TxOutput> confiscated_tx_output_map = 8;
-    map<string, SpentInfo> spent_info_map = 9;
-    map<string, Issuance> issuance_map = 10;
+    map<string, Issuance> issuance_map = 8;
+    map<string, TxOutput> confiscated_tx_output_map = 9;
+    map<string, SpentInfo> spent_info_map = 10;
     repeated ParamChange param_change_list = 11;
 }
 
