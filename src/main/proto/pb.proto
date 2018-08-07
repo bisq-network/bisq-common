@@ -1548,7 +1548,6 @@ message ParamChange {
 
 message ConfiscateBond {
     bytes hash = 1;
-    int32 activation_height = 2; //TODO needed?
 }
 
 message MyVote {
