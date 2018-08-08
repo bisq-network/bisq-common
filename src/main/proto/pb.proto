@@ -1452,19 +1452,18 @@ message Issuance {
 }
 
 message Proposal {
-    string uid = 1;
-    string name = 2;
-    string link = 3;
-    uint32 version = 4;
-    int64 creation_date = 5;
-    string tx_id = 6;
+    string name = 1;
+    string link = 2;
+    uint32 version = 3;
+    int64 creation_date = 4;
+    string tx_id = 5;
     oneof message {
-        CompensationProposal compensation_proposal = 7;
-        GenericProposal generic_proposal = 8;
-        ChangeParamProposal change_param_proposal = 9;
-        RemoveAltcoinProposal remove_altcoin_proposal = 10;
-        ConfiscateBondProposal confiscate_bond_proposal = 11;
-        BondedRoleProposal bonded_role_proposal = 12;
+        CompensationProposal compensation_proposal = 6;
+        GenericProposal generic_proposal = 7;
+        ChangeParamProposal change_param_proposal = 8;
+        RemoveAltcoinProposal remove_altcoin_proposal = 9;
+        ConfiscateBondProposal confiscate_bond_proposal = 10;
+        BondedRoleProposal bonded_role_proposal = 11;
     }
 }
 
