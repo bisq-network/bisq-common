@@ -1593,18 +1593,7 @@ message BlindVotePayload {
 }
 
 message Vote {
-    oneof message {
-        BooleanVote boolean_vote = 1;
-        LongVote long_vote = 2;
-    }
-}
-
-message BooleanVote {
     bool accepted = 1;
-}
-
-message LongVote {
-    uint64 value = 1;
 }
 
 message Merit {
