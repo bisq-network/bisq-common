@@ -166,8 +166,7 @@ public class Storage<T extends PersistableEnvelope> {
                 try {
                     // We keep a backup which might be used for recovery
                     fileManager.removeAndBackupFile(fileName);
-                    if (DevEnv.isDevMode())
-                        throw new RuntimeException(t);
+                    DevEnv.logErrorAndThrowIfDevMode(t.toString());
                 } catch (IOException e1) {
                     e1.printStackTrace();
                     log.error(e1.getMessage());
