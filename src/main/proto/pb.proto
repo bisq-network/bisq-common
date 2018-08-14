@@ -50,9 +50,9 @@ message NetworkEnvelope {
 
         PrivateNotificationMessage private_notification_message = 27;
 
-        GetBsqBlocksRequest get_bsq_blocks_request = 28;
-        GetBsqBlocksResponse get_bsq_blocks_response = 29;
-        NewBsqBlockBroadcastMessage new_bsq_block_broadcast_message = 30;
+        GetBlocksRequest get_blocks_request = 28;
+        GetBlocksResponse get_blocks_response = 29;
+        NewBlockBroadcastMessage new_block_broadcast_message = 30;
 
         AddPersistableNetworkPayloadMessage add_persistable_network_payload_message = 31;
         AckMessage ack_message = 32;
@@ -303,18 +303,20 @@ message PrivateNotificationMessage {
 
 // DAO
 
-message GetBsqBlocksRequest {
+message GetBlocksRequest {
     int32 from_block_height = 1;
     int32 nonce = 2;
 }
 
-message GetBsqBlocksResponse {
-    repeated BsqBlock bsq_blocks = 1;
+message GetBlocksResponse {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseBlock raw_blocks = 1;
     int32 request_nonce = 2;
 }
 
-message NewBsqBlockBroadcastMessage {
-    BsqBlock bsq_block = 1;
+message NewBlockBroadcastMessage {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    BaseBlock raw_block = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -362,9 +364,7 @@ message StoragePayload {
 
         MailboxStoragePayload mailbox_storage_payload = 6;
         OfferPayload offer_payload = 7;
-        CompensationRequestPayload compensation_request_payload = 8; // deprecated. Not used anymore.
-        ProposalPayload proposal_payload = 9;
-        BlindVote blind_vote = 10;
+        TempProposalPayload temp_proposal_payload = 8;
     }
 }
 
@@ -372,6 +372,8 @@ message PersistableNetworkPayload {
     oneof message {
         AccountAgeWitness account_age_witness = 1;
         TradeStatistics2 trade_statistics2 = 2;
+        ProposalPayload proposal_payload = 3;
+        BlindVotePayload blind_vote_payload = 4;
     }
 }
 
@@ -414,117 +416,6 @@ message PaymentAccountFilter {
     string payment_method_id = 1;
     string get_method_name = 2;
     string value = 3;
-}
-
-// DAO
-
-enum ScriptType {
-    PB_ERROR_SCRIPT_TYPES = 0;
-    PUB_KEY = 1;
-    PUB_KEY_HASH = 2;
-    SCRIPT_HASH = 3;
-    MULTISIG = 4;
-    NULL_DATA = 5;
-    WITNESS_V0_KEYHASH = 6;
-    WITNESS_V0_SCRIPTHASH = 7;
-    NONSTANDARD = 8;
-}
-
-message PubKeyScript {
-    int32 req_sigs = 1;
-    ScriptType script_type = 2;
-    repeated string addresses = 3;
-    string asm = 4;
-    string hex = 5;
-}
-
-message TxInput {
-    string connected_tx_output_tx_id = 1;
-    int32 connected_tx_output_index = 2;
-    TxOutput connected_tx_output = 3;
-}
-
-message SpentInfo {
-    int64 block_height = 1;
-    string tx_id = 2;
-    int32 input_index = 3;
-}
-
-enum TxOutputType {
-    PB_ERROR_TX_OUTPUT_TYPE = 0;
-    UNDEFINED = 1;
-    GENESIS_OUTPUT = 2;
-    BSQ_OUTPUT = 3;
-    BTC_OUTPUT = 4;
-    PROPOSAL_OP_RETURN_OUTPUT = 5;
-    COMP_REQ_OP_RETURN_OUTPUT = 6;
-    ISSUANCE_CANDIDATE_OUTPUT = 7;
-    BLIND_VOTE_LOCK_STAKE_OUTPUT = 8;
-    BLIND_VOTE_OP_RETURN_OUTPUT = 9;
-    VOTE_REVEAL_UNLOCK_STAKE_OUTPUT = 10;
-    VOTE_REVEAL_OP_RETURN_OUTPUT = 11;
-    BOND_LOCK = 12;
-    BOND_LOCK_OP_RETURN_OUTPUT = 13;
-    BOND_UNLOCK = 14;
-    BOND_UNLOCK_OP_RETURN_OUTPUT = 15;
-    INVALID_OUTPUT = 16;
-}
-
-message TxOutput {
-    int32 index = 1;
-    int64 value = 2;
-    string tx_id = 3;
-    PubKeyScript pub_key_script = 4;
-    string address = 5;
-    bytes op_return_data = 6;
-    int32 block_height = 7;
-    bool is_unspent = 8;
-    bool is_verified = 9;
-    TxOutputType tx_output_type = 10;
-    SpentInfo spent_info = 11;
-}
-
-enum TxType {
-    PB_ERROR_TX_TYPE = 0;
-    UNDEFINED_TX_TYPE = 1;
-    UNVERIFIED = 2;
-    INVALID = 3;
-    GENESIS = 4;
-    TRANSFER_BSQ = 5;
-    PAY_TRADE_FEE = 6;
-    PROPOSAL = 7;
-    COMPENSATION_REQUEST = 8;
-    BLIND_VOTE = 9;
-    VOTE_REVEAL = 10;
-    LOCK_UP = 11;
-    UN_LOCK = 12;
-}
-
-message Tx {
-    string tx_version = 1;
-    string id = 2;
-    int32 block_height = 3;
-    string block_hash = 4;
-    int64 time = 5;
-    repeated TxInput inputs = 6;
-    repeated TxOutput outputs = 7;
-    int64 burnt_fee = 8;
-    TxType tx_type = 9;
-    bool is_ssuance_tx = 10;
-    int32 issuance_block_height = 11;
-}
-
-message BsqBlock {
-    int32 height = 1;
-    int64 time = 2;
-    string hash = 3;
-    string previous_block_hash = 4;
-    repeated Tx txs = 5;
-}
-
-message TxIdIndexTuple {
-    string tx_id = 1;
-    int32 index = 2;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1024,21 +915,22 @@ message PersistableEnvelope {
         AccountAgeWitnessStore account_age_witness_store = 12;
         TradeStatistics2Store trade_statistics2_store = 13;
 
-        CompensationRequestPayload compensation_request_payload = 14; // deprecated. Not used anymore.
+        BsqState bsq_state = 14;
 
         // we need to keep id 15 here otherwise the reading of the old data structure would not work anymore.
         // can be removed after most people have updated as the reading of the PersistableNetworkPayloadList
         // is not mandatory.
         PersistableNetworkPayloadList persistable_network_payload_list = 15; // deprecated. Not used anymore.
 
-        VoteItemsList vote_items_list = 16; // deprecated. Not used anymore.
-        BsqBlockChain bsq_block_chain = 17;
-
-        CompensationRequestList compensation_request_list = 18; // deprecated. Not used anymore.
-        ProposalList proposal_list = 19;
-        MyVoteList my_vote_list = 20;
-        BlindVoteList blind_vote_list = 21;
-        ParamChangeEventList param_change_event_list = 22;
+        ProposalStore proposal_store = 16;
+        TempProposalStore temp_proposal_store = 17;
+        BlindVoteStore blind_vote_store = 18;
+        MyProposalList my_proposal_list = 19;
+        BallotList ballot_list = 20;
+        MyVoteList my_vote_list = 21;
+        MyBlindVoteList my_blind_vote_list = 22;
+        MeritList merit_list = 23;
+        BondedRoleList bonded_role_list = 24;
     }
 }
 
@@ -1116,26 +1008,6 @@ message NavigationPath {
 
 message PaymentAccountList {
     repeated PaymentAccount payment_account = 1;
-}
-
-message ProposalList {
-    repeated Proposal proposal = 1;
-}
-
-message MyVoteList {
-    repeated MyVote my_vote = 1;
-}
-
-message BlindVoteList {
-    repeated BlindVote blind_vote = 1;
-}
-
-message ParamChangeEventList {
-    repeated ParamChangeEvent param_change_event = 1;
-}
-
-// deprecated not used anymore
-message CompensationRequestList {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1410,120 +1282,330 @@ message UserPayload {
 // DAO
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-message BsqBlockChain {
-    repeated BsqBlock bsq_blocks = 1;
-    map<string, Tx> tx_map = 2;
-    map<string, TxOutput> unspent_tx_outputs_map = 3;
-    string genesis_tx_id = 4;
-    int32 genesis_block_height = 5;
-    int32 chain_head_height = 6;
-    Tx genesis_tx = 7;
-}
+// blockchain
 
-// deprecated. Not used anymore.
-message VoteItemsList {
-}
-
-message ProposalPayload {
-    uint32 version = 1;
-    int64 creation_date = 2;
-    string uid = 3;
-    string name = 4;
-    string title = 5;
-    string description = 6;
-    string link = 7;
-    bytes owner_pub_key_encoded = 8;
-    string tx_id = 9;
-    map<string, string> extra_data = 10;
+message BaseBlock {
+    int32 height = 1;
+    int64 time = 2;
+    string hash = 3;
+    string previous_block_hash = 4;
     oneof message {
-        CompensationRequestPayload compensation_request_payload = 11;
-        GenericProposalPayload generic_proposal_payload = 12;
-        ChangeParamProposalPayload change_param_proposal_payload = 13;
-        RemoveAltcoinProposalPayload remove_altcoin_proposal_payload = 14;
+        RawBlock raw_block = 5;
+        Block block = 6;
     }
 }
 
-message CompensationRequestPayload {
-    int64 requested_bsq = 1;
-    string bsq_address = 2;
+message RawBlock {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTx raw_txs = 1;
 }
 
-message GenericProposalPayload {
+message Block {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTx txs = 1;
 }
 
-message ChangeParamProposalPayload {
+message BaseTx {
+    string tx_version = 1;
+    string id = 2;
+    int32 block_height = 3;
+    string block_hash = 4;
+    int64 time = 5;
+    repeated TxInput tx_inputs = 6;
+    oneof message {
+        RawTx raw_tx = 7;
+        Tx tx = 8;
+    }
 }
 
-message RemoveAltcoinProposalPayload {
-    string currency_code = 1;
+message RawTx {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTxOutput raw_tx_outputs = 1;
+}
+
+message Tx {
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseTxOutput tx_outputs = 1;
+    TxType txType = 2;
+    int64 burnt_fee = 3;
+    int32 lock_time = 4;
+    int32 unlock_block_height = 5;
+}
+
+enum TxType {
+    PB_ERROR_TX_TYPE = 0;
+    UNDEFINED_TX_TYPE = 1;
+    UNVERIFIED = 2;
+    INVALID = 3;
+    GENESIS = 4;
+    TRANSFER_BSQ = 5;
+    PAY_TRADE_FEE = 6;
+    PROPOSAL = 7;
+    COMPENSATION_REQUEST = 8;
+    BLIND_VOTE = 9;
+    VOTE_REVEAL = 10;
+    LOCK_UP = 11;
+    UN_LOCK = 12;
+}
+
+message TxInput {
+    string connected_tx_output_tx_id = 1;
+    int32 connected_tx_output_index = 2;
+    string pub_key = 3;
+}
+
+message BaseTxOutput {
+    int32 index = 1;
+    int64 value = 2;
+    string tx_id = 3;
+    PubKeyScript pub_key_script = 4;
+    string address = 5;
+    bytes op_return_data = 6;
+    int32 block_height = 7;
+    oneof message {
+        RawTxOutput raw_tx_output = 8;
+        TxOutput tx_output = 9;
+    }
+}
+
+message RawTxOutput {
+}
+
+message TxOutput {
+    TxOutputType tx_output_type = 1;
+}
+
+enum TxOutputType {
+    PB_ERROR_TX_OUTPUT_TYPE = 0;
+    UNDEFINED = 1;
+    GENESIS_OUTPUT = 2;
+    BSQ_OUTPUT = 3;
+    BTC_OUTPUT = 4;
+    PROPOSAL_OP_RETURN_OUTPUT = 5;
+    COMP_REQ_OP_RETURN_OUTPUT = 6;
+    ISSUANCE_CANDIDATE_OUTPUT = 7;
+    BLIND_VOTE_LOCK_STAKE_OUTPUT = 8;
+    BLIND_VOTE_OP_RETURN_OUTPUT = 9;
+    VOTE_REVEAL_UNLOCK_STAKE_OUTPUT = 10;
+    VOTE_REVEAL_OP_RETURN_OUTPUT = 11;
+    BOND_LOCK = 12;
+    BOND_LOCK_OP_RETURN_OUTPUT = 13;
+    BOND_UNLOCK = 14;
+    BOND_UNLOCK_OP_RETURN_OUTPUT = 15;
+    INVALID_OUTPUT = 16;
+}
+
+message SpentInfo {
+    int64 block_height = 1;
+    string tx_id = 2;
+    int32 input_index = 3;
+}
+
+enum ScriptType {
+    PB_ERROR_SCRIPT_TYPES = 0;
+    PUB_KEY = 1;
+    PUB_KEY_HASH = 2;
+    SCRIPT_HASH = 3;
+    MULTISIG = 4;
+    NULL_DATA = 5;
+    WITNESS_V0_KEYHASH = 6;
+    WITNESS_V0_SCRIPTHASH = 7;
+    NONSTANDARD = 8;
+}
+
+message PubKeyScript {
+    int32 req_sigs = 1;
+    ScriptType script_type = 2;
+    repeated string addresses = 3;
+    string asm = 4;
+    string hex = 5;
+}
+
+// dao data
+
+message DaoPhase {
+    int32 phase_ordinal = 1;
+    int32 duration = 2;
+}
+
+message Cycle {
+    int32 height_of_first_lock = 1;
+    repeated DaoPhase dao_phase = 2;
+}
+
+message BsqState {
+    int32 chain_height = 1;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    repeated BaseBlock blocks = 2;
+    repeated Cycle cycles = 3;
+    // Because of the way how PB implements inheritence we need to use the super class as type
+    map<string, BaseTxOutput> unspent_tx_output_map = 4;
+    map<string, BaseTxOutput> non_bsq_tx_output_map = 5;
+    map<string, Issuance> issuance_map = 6;
+    map<string, BaseTxOutput> confiscated_tx_output_map = 7;
+    map<string, SpentInfo> spent_info_map = 8;
+    repeated ParamChange param_change_list = 9;
+}
+
+message Issuance {
+    string tx_id = 1;
+    int32 chain_height = 2;
+    int64 amount = 3;
+    string pub_key = 4;
 }
 
 message Proposal {
-    ProposalPayload proposal_payload = 1;
-    VoteResult vote_result = 2;
-    map<string, string> extra_data = 3;
+    string name = 1;
+    string link = 2;
+    uint32 version = 3;
+    int64 creation_date = 4;
+    string tx_id = 5;
     oneof message {
-        CompensationRequest compensation_request = 4;
-        GenericProposal generic_proposal = 5;
-        ChangeParamProposal change_param_proposal = 6;
-        RemoveAltcoinProposal remove_altcoin_proposal = 7;
+        CompensationProposal compensation_proposal = 6;
+        GenericProposal generic_proposal = 7;
+        ChangeParamProposal change_param_proposal = 8;
+        RemoveAltcoinProposal remove_altcoin_proposal = 9;
+        ConfiscateBondProposal confiscate_bond_proposal = 10;
+        BondedRoleProposal bonded_role_proposal = 11;
     }
 }
 
-message MyVote {
-    ProposalList proposal_list = 1;
-    bytes secret_key_encoded = 2;
-    BlindVote blind_vote = 3;
-    int64 date = 4;
-    string reveal_tx_id = 5;
-}
-
-message ParamChangeEvent {
-    // We use ordinal instead of Enum as enums in PB are a pain... as well we want to be more flexible at changes
-    int32 dao_param_ordinal = 1;
-    int64 value = 2;
-    int32 block_height = 3;
-}
-
-message BlindVote {
-    bytes encrypted_proposal_list = 1;
-    string tx_id = 2;
-    int64 stake = 3;
-    bytes owner_pub_key_as_encoded = 4;
-    map<string, string> extra_data = 5;
-}
-
-message RevealedVote {
-    ProposalList proposal_list = 1;
-    BlindVote blind_vote = 2;
-    string reveal_tx_id = 3;
-}
-
-message CompensationRequest {
+message CompensationProposal {
+    int64 requested_bsq = 1;
+    string bsq_address = 2;
 }
 
 message GenericProposal {
 }
 
 message ChangeParamProposal {
+    string param = 1; // name of enum
+    int64 param_value = 2;
 }
 
 message RemoveAltcoinProposal {
+    string currency_code = 1;
 }
 
-message VoteResult {
-    oneof message {
-        BooleanVoteResult boolean_vote_result = 1;
-        LongVoteResult long_vote_result = 2;
-    }
+message ConfiscateBondProposal {
+    bytes hash = 1;
 }
 
-message BooleanVoteResult {
+message BondedRoleProposal {
+    BondedRole bonded_role = 1;
+}
+
+message BondedRole {
+    string uid = 1;
+    string name = 2;
+    string link = 3;
+    string bonded_role_type = 4; // name of BondedRoleType enum
+    uint64 start_date = 5;
+    string lockup_tx_id = 6;
+    uint64 revoke_date = 7;
+    string unlock_tx_id = 8;
+}
+
+message BondedRoleList {
+    repeated BondedRole bonded_role = 1;
+}
+
+message TempProposalPayload {
+    Proposal proposal = 1;
+    bytes owner_pub_key_encoded = 2;
+    map<string, string> extra_data = 3;
+}
+
+message ProposalPayload {
+    Proposal proposal = 1;
+    bytes hash = 2;
+}
+
+message ProposalStore {
+    repeated ProposalPayload items = 1;
+}
+
+message TempProposalStore {
+    repeated ProtectedStorageEntry items = 1;
+}
+
+message Ballot {
+    Proposal proposal = 1;
+    Vote vote = 2;
+}
+
+message MyProposalList {
+    repeated Proposal proposal = 1;
+}
+
+message BallotList {
+    repeated Ballot ballot = 1;
+}
+
+message ParamChange {
+    string param_name = 1;
+    int64 param_value = 2;
+    int32 activation_height = 3;
+}
+
+message ConfiscateBond {
+    bytes hash = 1;
+}
+
+message MyVote {
+    int32 height = 1;
+    BallotList ballot_list = 2;
+    bytes secret_key_encoded = 3;
+    BlindVote blind_vote = 4;
+    int64 date = 5;
+    string reveal_tx_id = 6;
+}
+
+message MyVoteList {
+    repeated MyVote my_vote = 1;
+}
+
+message VoteWithProposalTxId {
+    string proposal_tx_id = 1;
+    Vote vote = 2;
+}
+
+message VoteWithProposalTxIdList {
+    repeated VoteWithProposalTxId item = 1;
+}
+
+message BlindVote {
+    bytes encrypted_votes = 1;
+    string tx_id = 2;
+    int64 stake = 3;
+    bytes encrypted_merit_list = 4;
+}
+
+message MyBlindVoteList {
+    repeated BlindVote blind_vote = 1;
+}
+
+message BlindVoteStore {
+    repeated BlindVotePayload items = 1;
+}
+
+message BlindVotePayload {
+    BlindVote blind_vote = 1;
+    int64 date = 2;
+    bytes hash = 3;
+}
+
+message Vote {
     bool accepted = 1;
 }
 
-message LongVoteResult {
-    uint64 value = 1;
+message Merit {
+    Issuance issuance = 1;
+    bytes signature = 2;
+}
+
+message MeritList {
+    repeated Merit merit = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////

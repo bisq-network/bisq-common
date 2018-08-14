@@ -52,4 +52,30 @@ public class UtilitiesTest {
         assertEquals(1, Utilities.commaSeparatedListToSet("test1", false).size());
         assertEquals(2, Utilities.commaSeparatedListToSet("test1, test2", false).size());
     }
+
+    @Test
+    public void testIntegerToByteArray() {
+        assertEquals("0000", Utilities.bytesAsHexString(Utilities.integerToByteArray(0, 2)));
+        assertEquals("ffff", Utilities.bytesAsHexString(Utilities.integerToByteArray(65535, 2)));
+        assertEquals("0011", Utilities.bytesAsHexString(Utilities.integerToByteArray(17, 2)));
+        assertEquals("1100", Utilities.bytesAsHexString(Utilities.integerToByteArray(4352, 2)));
+        assertEquals("dd22", Utilities.bytesAsHexString(Utilities.integerToByteArray(56610, 2)));
+        assertEquals("7fffffff", Utilities.bytesAsHexString(Utilities.integerToByteArray(2147483647, 4))); // Integer.MAX_VALUE
+        assertEquals("80000000", Utilities.bytesAsHexString(Utilities.integerToByteArray(-2147483648, 4))); // Integer.MIN_VALUE
+        assertEquals("00110011", Utilities.bytesAsHexString(Utilities.integerToByteArray(1114129, 4)));
+        assertEquals("ffeeffef", Utilities.bytesAsHexString(Utilities.integerToByteArray(-1114129, 4)));
+    }
+
+    @Test
+    public void testByteArrayToInteger() {
+        assertEquals(0, Utilities.byteArrayToInteger(Utilities.decodeFromHex("0000")));
+        assertEquals(65535, Utilities.byteArrayToInteger(Utilities.decodeFromHex("ffff")));
+        assertEquals(4352, Utilities.byteArrayToInteger(Utilities.decodeFromHex("1100")));
+        assertEquals(17, Utilities.byteArrayToInteger(Utilities.decodeFromHex("0011")));
+        assertEquals(56610, Utilities.byteArrayToInteger(Utilities.decodeFromHex("dd22")));
+        assertEquals(2147483647, Utilities.byteArrayToInteger(Utilities.decodeFromHex("7fffffff")));
+        assertEquals(-2147483648, Utilities.byteArrayToInteger(Utilities.decodeFromHex("80000000")));
+        assertEquals(1114129, Utilities.byteArrayToInteger(Utilities.decodeFromHex("00110011")));
+        assertEquals(-1114129, Utilities.byteArrayToInteger(Utilities.decodeFromHex("ffeeffef")));
+    }
 }

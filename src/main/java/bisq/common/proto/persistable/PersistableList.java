@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Delegate;
 
+@EqualsAndHashCode
 public class PersistableList<T extends PersistablePayload> implements PersistableEnvelope, Iterable<T> {
     @Delegate(excludes = ExcludesDelegateMethods.class)
     @Getter
