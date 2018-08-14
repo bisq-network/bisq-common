@@ -716,6 +716,7 @@ message PaymentAccountPayload {
         RevolutAccountPayload revolut_account_payload = 21;
         WeChatPayAccountPayload we_chat_pay_account_payload = 22;
         MoneyGramAccountPayload money_gram_account_payload = 23;
+        HalCashAccountPayload hal_cash_account_payload = 24;
     }
     map<string, string> exclude_from_json_data = 15;
 }
@@ -795,6 +796,10 @@ message MoneyGramAccountPayload {
     string country_code = 2;
     string state = 3;
     string email = 4;
+}
+
+message HalCashAccountPayload {
+    string mobile_nr = 1;
 }
 
 message WesternUnionAccountPayload {
