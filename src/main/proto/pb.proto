@@ -1405,6 +1405,7 @@ message UserPayload {
     Arbitrator registered_arbitrator = 10;
     Mediator registered_mediator = 11;
     PriceAlertFilter price_alert_filter = 12;
+    repeated MarketAlertFilter market_alert_filters = 13;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -1595,6 +1596,13 @@ message PriceAlertFilter {
     string currencyCode = 1;
     int64 high = 2;
     int64 low = 3;
+}
+
+message MarketAlertFilter {
+    PaymentAccount payment_account = 1;
+    int32 trigger_value = 2;
+    bool is_buy_offer = 3;
+    repeated string alert_ids = 4;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
