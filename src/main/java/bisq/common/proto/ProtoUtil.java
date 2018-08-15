@@ -64,11 +64,11 @@ public class ProtoUtil {
      * @param <E>      the enum Type
      * @return an enum
      */
+    @Nullable
     public static <E extends Enum<E>> E enumFromProto(Class<E> enumType, String name) {
         E result = Enums.getIfPresent(enumType, name).orNull();
-        if (result == null) {
+        if (result == null)
             log.error("Invalid value for enum " + enumType.getSimpleName() + ": " + name);
-        }
 
         return result;
     }

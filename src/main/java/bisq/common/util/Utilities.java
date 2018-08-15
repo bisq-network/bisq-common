@@ -601,4 +601,21 @@ public class Utilities {
         return name != null && name.equals("Java(TM) SE Runtime Environment")
                 && ver != null && (ver.startsWith("1.7") || ver.startsWith("1.8"));
     }
+
+    public static byte[] integerToByteArray(int intValue, int numBytes) {
+        byte[] bytes = new byte[numBytes];
+        for (int i = numBytes - 1; i >= 0; i--) {
+            bytes[i] = ((byte) (intValue & 0xFF));
+            intValue >>>= 8;
+        }
+        return bytes;
+    }
+
+    public static int byteArrayToInteger(byte[] bytes) {
+        int result = 0;
+        for (byte aByte : bytes) {
+            result = result << 8 | aByte & 0xff;
+        }
+        return result;
+    }
 }

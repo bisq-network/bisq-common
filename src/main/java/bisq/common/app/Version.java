@@ -118,8 +118,9 @@ public class Version {
                 '}');
     }
 
-    public static final byte COMPENSATION_REQUEST_VERSION = (byte) 0x01;
+    public static final byte COMPENSATION_REQUEST = (byte) 0x01;
     public static final byte PROPOSAL = (byte) 0x01;
-    public static final byte BLIND_VOTE_VERSION = (byte) 0x01;
-    public static final byte VOTE_REVEAL_VERSION = (byte) 0x01;
+    public static final byte BLIND_VOTE = (byte) 0x01;
+    public static final byte VOTE_REVEAL = (byte) 0x01;
+    public static final byte LOCKUP = (byte) 0x01;
 }
