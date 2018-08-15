@@ -49,4 +49,12 @@ public class Tuple2<A, B> implements Serializable {
         result = 31 * result + (second != null ? second.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Tuple2{" +
+                "\n     first=" + first +
+                ",\n     second=" + second +
+                "\n}";
+    }
 }
