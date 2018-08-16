@@ -38,7 +38,8 @@ public class Capabilities {
         DAO_FULL_NODE,
         PROPOSAL,
         BLIND_VOTE,
-        ACK_MSG
+        ACK_MSG,
+        BSQ_BLOCK
     }
 
     // Application need to set supported capabilities at startup
