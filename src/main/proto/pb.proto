@@ -912,15 +912,16 @@ message PersistableEnvelope {
         UserPayload user_payload = 10;
         PaymentAccountList payment_account_list = 11;
 
-        // we need to keep id 15 here otherwise the reading of the old data structure would not work anymore.
-        // can be removed after most people have updated as the reading of the PersistableNetworkPayloadList
-        // is not mandatory.
-        PersistableNetworkPayloadList persistable_network_payload_list = 12; // deprecated. Not used anymore.
+        BsqState bsq_state = 12;
 
         AccountAgeWitnessStore account_age_witness_store = 13;
         TradeStatistics2Store trade_statistics2_store = 14;
 
-        BsqState bsq_state = 15;
+        // we need to keep id 15 here otherwise the reading of the old data structure would not work anymore.
+        // can be removed after most people have updated as the reading of the PersistableNetworkPayloadList
+        // is not mandatory.
+        PersistableNetworkPayloadList persistable_network_payload_list = 15; // deprecated. Not used anymore.
+
         ProposalStore proposal_store = 16;
         TempProposalStore temp_proposal_store = 17;
         BlindVoteStore blind_vote_store = 18;
