@@ -912,10 +912,10 @@ message PersistableEnvelope {
         UserPayload user_payload = 10;
         PaymentAccountList payment_account_list = 11;
 
-        AccountAgeWitnessStore account_age_witness_store = 12;
-        TradeStatistics2Store trade_statistics2_store = 13;
+        BsqState bsq_state = 12;
 
-        BsqState bsq_state = 14;
+        AccountAgeWitnessStore account_age_witness_store = 13;
+        TradeStatistics2Store trade_statistics2_store = 14;
 
         // we need to keep id 15 here otherwise the reading of the old data structure would not work anymore.
         // can be removed after most people have updated as the reading of the PersistableNetworkPayloadList

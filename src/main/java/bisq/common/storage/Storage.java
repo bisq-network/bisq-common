@@ -165,7 +165,7 @@ public class Storage<T extends PersistableEnvelope> {
                 log.error(t.getMessage());
                 try {
                     // We keep a backup which might be used for recovery
-                    fileManager.removeAndBackupFile(fileName);
+                    removeAndBackupFile(fileName);
                     DevEnv.logErrorAndThrowIfDevMode(t.toString());
                 } catch (IOException e1) {
                     e1.printStackTrace();
@@ -177,5 +177,9 @@ public class Storage<T extends PersistableEnvelope> {
             }
         }
         return null;
+    }
+
+    public void removeAndBackupFile(String fileName) throws IOException {
+        fileManager.removeAndBackupFile(fileName);
     }
 }
