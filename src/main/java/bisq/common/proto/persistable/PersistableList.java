@@ -74,4 +74,12 @@ public class PersistableList<T extends PersistablePayload> implements Persistabl
     private interface ExcludesDelegateMethods<T> {
         Stream<T> stream();
     }
+
+    @Override
+    public String toString() {
+        return "PersistableList{" +
+                "\n     list=" + list +
+                ",\n     toProto=" + toProto +
+                "\n}";
+    }
 }
